@@ -1,4 +1,7 @@
 const electron = require('electron')
+const { resolve } = require('path')
+const { execSync } = require('child_process')
+
 const { app } = electron
 const { BrowserWindow } = electron
 
@@ -13,10 +16,24 @@ const createWindow = () => {
   win.on('closed', () => { win = null })
 }
 
-app.on('ready', createWindow)
+app.on('ready', () => {
+  const tmp = require('tmp')
+  tmp.dir((err, path) => {
+    if (err) throw err
+
+    global.tmpProjectPath = path
+    createWindow()
+
+    execSync(`cp -R ${resolve(__dirname, 'xcode-project')} ${resolve(path)}`)
+    execSync(`open -a xcode ${resolve(path, 'xcode-project/pokemon-webspoof.xcodeproj')}`)
+
+    // quit xcode && remove tmp directory on exit
+    app.on('before-quit', () => {
+      execSync('killall Xcode')
+      execSync(`rm -rf ${path}`)
+    })
+  })
+})
+
 app.on('window-all-closed', () => (process.platform !== 'darnwin') && app.quit())
 app.on('activate', () => (win === null) && createWindow())
-
-const { resolve } = require('path')
-const { execSync } = require('child_process')
-execSync(`open -a xcode ${resolve(__dirname, 'xcode-project/pokemon-webspoof.xcodeproj')}`)

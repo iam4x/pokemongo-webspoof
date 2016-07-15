@@ -9,6 +9,7 @@ import settings from './settings.js'
 const { writeFile } = window.require('fs')
 const { resolve } = window.require('path')
 const { exec } = window.require('child_process')
+const { remote } = window.require('electron')
 
 const userLocation = observable([ 0, 0 ])
 
@@ -40,7 +41,7 @@ const updateXcodeLocation = throttle(([ lat, lng ]) => {
 
   if (settings.updateXcodeLocation.get()) {
     // write `pokemonLocation.gpx` file fro xcode spoof location
-    const filePath = resolve(window.__dirname, 'pokemonLocation.gpx')
+    const filePath = resolve(remote.getGlobal('tmpProjectPath'), 'pokemonLocation.gpx')
     writeFile(filePath, xcodeLocationData, async (error) => {
       if (error) {
         Alert.error(`

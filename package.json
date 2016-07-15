@@ -9,9 +9,7 @@
     "clean": "rm -rf ./dist/* ./pokemongo-webspoof-darwin-x64",
     "build:code": "NODE_ENV=production webpack --config webpack.config.babel.js",
     "build:electron": "electron-packager . pokemongo-webspoof --platform=darwin --arch=x64",
-    "open:xcode": "open ./xcode-project/pokemon-webspoof.xcodeproj/",
     "open:app": "open ./pokemongo-webspoof-darwin-x64/pokemongo-webspoof.app",
-    "start": "npm run open:app && npm run open:xcode",
     "build": "npm run clean && npm run build:code && npm run build:electron"
   },
   "bin": {
@@ -19,6 +17,7 @@
     "pgws": "./bin/pgws"
   },
   "dependencies": {
+    "tmp": "0.0.28"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
