@@ -1,0 +1,20 @@
+.coordinates {
+  position: absolute;
+  top: 60px;
+  left: 10px;
+  width: 350px;
+
+  .pull-xs-left {
+    margin-right: 2%;
+    width: 46%;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .form-control {
+    font-size: 12px !important;
+    padding: 0.75rem 0.5rem !important;
+  }
+}

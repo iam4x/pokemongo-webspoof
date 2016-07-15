@@ -1,0 +1,4 @@
+{
+  "presets": [ "save" ],
+  "plugins": [ "typecheck" ]
+}
