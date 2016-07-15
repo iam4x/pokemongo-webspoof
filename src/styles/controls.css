@@ -1,0 +1,50 @@
+@keyframes lastMove {
+  from { color: #FF0000; }
+  to { color: #FFF; }
+}
+
+.controls {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 3px;
+  color: #FFFFFF;
+  position: absolute;
+  left: 10px;
+  bottom: 45px;
+  height: 115px;
+  width: 110px;
+
+  .octicon {
+    cursor: pointer;
+    font-size: 50px;
+    position: absolute;
+
+    &.last {
+      animation: lastMove 300ms ease;
+    }
+
+    &.octicon-arrow-up {
+      top: 0;
+      left: 38px;
+    }
+
+    &.octicon-arrow-up {
+      top: 0;
+      left: 38px;
+    }
+
+    &.octicon-arrow-left {
+      top: 32px;
+      left: 10px;
+    }
+
+    &.octicon-arrow-right {
+      top: 32px;
+      left: 66px;
+    }
+
+    &.octicon-arrow-down {
+      top: 66px;
+      left: 38px;
+    }
+  }
+}

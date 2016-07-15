@@ -1,0 +1,12 @@
+.speed {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 3px;
+  color: #FFF;
+  display: block;
+  position: absolute;
+  text-align: center;
+  padding: 10px;
+  bottom: 45px;
+  left: 130px;
+  width: 100px;
+}

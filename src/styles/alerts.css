@@ -1,0 +1,15 @@
+.s-alert-box {
+  border-radius: 3px;
+  font-size: 12px;
+  padding: 10px;
+
+  .stack {
+    background-color: rgba(0, 0, 0, .3);
+    border-radius: 3px;
+    color: #FFF;
+    margin-top: 10px;
+    font-size: 10px;
+    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    padding: 5px;
+  }
+}

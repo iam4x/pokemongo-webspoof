@@ -1,0 +1,9 @@
+.total-distance {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: rgb(255, 255, 255);
+  position: absolute;
+  bottom: 45px;
+  left: 240px;
+  border-radius: 3px;
+  padding: 10px;
+}
