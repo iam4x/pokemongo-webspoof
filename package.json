@@ -1,16 +1,16 @@
 {
   "name": "pokemongo-webspoof",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Spoof your iOS device GPS location for Pokémon Go",
   "main": "main.js",
   "scripts": {
     "dev": "electron main.js | NODE_ENV=development webpack --config webpack.config.babel.js --watch",
     "lint": "eslint src",
-    "clean": "rm -rf ./dist/* ./pokemongo-webspoof-darwin-x64",
+    "clean": "rm -rf ./dist/* ./pokemongo-webspoof-darwin-x64 ./pokemongo-webspoof.zip",
     "build:code": "NODE_ENV=production webpack --config webpack.config.babel.js",
     "build:electron": "electron-packager . pokemongo-webspoof --platform=darwin --arch=x64",
     "open:app": "open ./pokemongo-webspoof-darwin-x64/pokemongo-webspoof.app",
-    "build": "npm run clean && npm run build:code && npm run build:electron"
+    "build": "npm run clean && npm run build:code && npm run build:electron && npm run archive:app"
   },
   "bin": {
     "pokemongo-webspoof": "./bin/pgws",

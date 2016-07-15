@@ -3,7 +3,7 @@
 
 ![Example](./example.gif)
 
-:arrow_right: [Download latest release (v1.0.0)](https://github.com/iam4x/pokemongo-webspoof/releases/download/1.0/pokemongo-webspoof.app.zip)
+:arrow_right: [Download latest release (v1.0.1)](https://github.com/iam4x/pokemongo-webspoof/releases/download/1.0.1/pokemongo-webspoof.app.zip)
 
 ## Features
 
