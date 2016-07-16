@@ -13,6 +13,13 @@ let win
 const createWindow = () => {
   win = new BrowserWindow({ width: 800, height: 800 })
   win.loadURL(`file://${__dirname}/index.html`)
+
+  // open external URLs into default browser
+  win.webContents.on('new-window', (e, url) => {
+    e.preventDefault()
+    execSync(`open ${url}`)
+  })
+
   win.on('closed', () => { win = null })
 }
 
