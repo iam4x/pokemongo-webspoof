@@ -7,9 +7,10 @@
 @import './speed.css';
 @import './total-distance.css';
 @import './alerts.css';
+@import './autopilot.css';
 
 .google-map-container {
   position: relative;
-  height: calc(100vh - $sidebar-height);
+  height: calc(100vh - $navbar-height);
   width: 100vw;
 }

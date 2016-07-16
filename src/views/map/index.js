@@ -15,6 +15,7 @@ import Coordinates from './coordinates.js'
 import SpeedLimit from './speed-limit.js'
 import Controls from './controls.js'
 import TotalDistance from './total-distance.js'
+import Autopilot from './autopilot.js'
 
 const isLoading = observable(true)
 
@@ -89,6 +90,7 @@ class Map extends Component {
         <BooleanSettings />
         <Controls />
         <TotalDistance />
+        <Autopilot />
 
         { /* pokéball in center of map */ }
         <img alt='pokeball' className='pokeball' src='./pokeball.png' />
