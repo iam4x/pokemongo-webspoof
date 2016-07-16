@@ -3,8 +3,13 @@ import { observer } from 'mobx-react'
 
 import { serverStatus, isLoading } from '../../models/server-status.js'
 
+const handleStatusClick = () =>
+  window.open('http://cmmcd.com/PokemonGo/')
+
 const ServerStatus = observer(() =>
-  <div className='block server-status'>
+  <div
+    className='block server-status'
+    onClick={ handleStatusClick }>
     <div className='title'>Pokémon Go servers</div>
 
     <div className='clearfix'>
