@@ -2,7 +2,7 @@ import React from 'react'
 import { action } from 'mobx'
 import { observer } from 'mobx-react'
 
-import userLocation from '../models/user-location.js'
+import userLocation from '../../models/user-location.js'
 
 const handleChange = (idx) => action(({ target: { value } }) => {
   userLocation[idx] = parseFloat(value)

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { action } from 'mobx'
 import places from 'places.js'
 
-import userLocation from '../models/user-location.js'
+import userLocation from '../../models/user-location.js'
 
 class GoToPlace extends Component {
 

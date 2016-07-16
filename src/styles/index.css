@@ -1,15 +1,1 @@
-@import './boolean-settings.css';
-@import './controls.css';
-@import './coordinates.css';
-@import './go-to-places.css';
-@import './pokeball.css';
-@import './speed-limit.css';
-@import './speed.css';
-@import './total-distance.css';
-@import './alerts.css';
-
-.google-map-container {
-  position: relative;
-  height: 100vh;
-  width: 100%;
-}
+@import './map/index.css';

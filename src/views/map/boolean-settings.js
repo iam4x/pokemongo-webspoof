@@ -2,7 +2,7 @@ import React from 'react'
 import { observer } from 'mobx-react'
 import cx from 'classnames'
 
-import { addJitterToMoves, updateXcodeLocation } from '../models/settings.js'
+import { addJitterToMoves, updateXcodeLocation } from '../../models/settings.js'
 
 const settings = [
   [ addJitterToMoves, 'Add randomness to moves' ],

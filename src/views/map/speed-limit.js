@@ -2,7 +2,7 @@ import React from 'react'
 import { observer } from 'mobx-react'
 import cx from 'classnames'
 
-import { speedLimit } from '../models/settings.js'
+import { speedLimit } from '../../models/settings.js'
 
 const presets = [ [ '50-30', 2 ], [ '30-20', 3 ], [ '20-10', 4 ] ]
 

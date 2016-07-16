@@ -4,9 +4,9 @@ import { observable, action } from 'mobx'
 import { observer } from 'mobx-react'
 import cx from 'classnames'
 
-import userLocation from '../models/user-location.js'
-import lastMoves from '../models/last-moves.js'
-import settings from '../models/settings.js'
+import userLocation from '../../models/user-location.js'
+import lastMoves from '../../models/last-moves.js'
+import settings from '../../models/settings.js'
 
 const lastMoveDirection = observable(null)
 
