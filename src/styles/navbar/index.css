@@ -17,4 +17,9 @@
       font-weight: bold;
     }
   }
+
+  .tag {
+    font-size: 100%;
+    margin-top: 3px;
+  }
 }

@@ -1,5 +1,6 @@
 .server-status {
   cursor: pointer;
+  margin-right: 25px;
   width: 125px;
 
   .fa { color: #3498db; }
