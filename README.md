@@ -5,7 +5,8 @@
 
 ![Example](./example.gif)
 
-:arrow_right: Download last release [pokemongo-webspoof.app.tar.gz (v1.0.2)](https://github.com/iam4x/pokemongo-webspoof/releases/download/v1.0.2/pokemongo-webspoof.app.tar.gz)
+* :arrow_right: Download last release [pokemongo-webspoof.app.tar.gz (v1.0.2)](https://github.com/iam4x/pokemongo-webspoof/releases/download/v1.0.2/pokemongo-webspoof.app.tar.gz)
+* :arrow_right: Changelog is available [here](https://github.com/iam4x/pokemongo-webspoof/releases)
 
 ## Features
 
@@ -20,7 +21,7 @@
 * Xcode installed
 * An iOS device with Pokémon Go connected to your Mac
 
-## How-to
+## How-to run
 
 1. Start Pokémon Go on your iOS device & connect to your Mac
 2. Start the `pokemongo-webspoof` app, it will start also Xcode
@@ -29,11 +30,21 @@
 5. Go back to Xcode, click into menu Debug -> Simulate Location -> pokemonLocation
 6. And voilà, you can move with the arrows key and see your character move
 
+## How-to Update
+
+1. Delete `pokemongo-webspoof.app` from your computer
+2. Remove `pokemongo-webspoof.app` from authorized app to Accessibility
+  * (System Preferences -> Security & Privacy -> Privacy Tab -> Accessibility)
+3. Download latest release
+4. Add back new `pokemongo-webspoof.app` to authorized app to Accessibility
+  * (System Preferences -> Security & Privacy -> Privacy Tab -> Accessibility)
+
 ## Known issues
 
 `osascript is not allowed assistive access . (-1719) [...]`
 
 * https://github.com/iam4x/pokemongo-webspoof/issues/5#issuecomment-233106899
+* https://github.com/iam4x/pokemongo-webspoof/issues/5#issuecomment-233140361
 
 `Can't get menu item "pokemonLocation" of menu 1 of menu item "Simulate Location" [...]`
 * https://github.com/iam4x/pokemongo-webspoof/issues/5#issuecomment-233124626
