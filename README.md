@@ -7,7 +7,7 @@
 
 ## Features
 
-* Jump to places with AlgoliaPlaces search :rocket:
+* Jump to places with [Algolia Places](https://community.algolia.com/places/) search :rocket:
 * Switch between different speed presets
 * Total distance counter (it differs from Pokémon Go incubator counter?)
 * Current speed counter
