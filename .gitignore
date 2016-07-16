@@ -4,7 +4,7 @@ pokemonLocation.gpx
 npm-debug.log
 pokemongo-webspoof-*
 .DS_Store
-pokemongo-webspoof.zip
+*.tar.gz
 
 # Xcode
 #
