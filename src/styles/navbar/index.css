@@ -1,4 +1,5 @@
 @import './server-status.css';
+@import './github-star.css';
 
 .navbar {
   background-color: #273135;
@@ -9,7 +10,7 @@
   width: 100vw;
 
   .block {
-    float: 'left';
+    float: left;
     font-size: 12px;
 
     .title {
