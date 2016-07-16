@@ -25,7 +25,7 @@ app.on('ready', () => {
     createWindow()
 
     execSync(`cp -R ${resolve(__dirname, 'xcode-project')} ${resolve(path)}`)
-    execSync(`open -a xcode ${resolve(path, 'xcode-project/pokemon-webspoof.xcodeproj')}`)
+    execSync(`open ${resolve(path, 'xcode-project/pokemon-webspoof.xcodeproj')}`)
 
     // quit xcode && remove tmp directory on exit
     app.on('before-quit', () => {
