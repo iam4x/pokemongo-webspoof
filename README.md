@@ -1,12 +1,11 @@
 # ![pikachu](./pikachu.gif) Pokémon GO - WebSpoof
 > Spoof your iOS device GPS location for Pokémon Go
+>
+> Don't forget to star the project for frequent updates 🙏
 
 ![Example](./example.gif)
 
-## Last releases (v1.0.1)
-
-* :arrow_right: [pokemongo-webspoof_xcode.app.zip](https://github.com/iam4x/pokemongo-webspoof/releases/download/1.0.1/pokemongo-webspoof_xcode.app.zip)
-* :arrow_right: [pokemongo-webspoof_xcode-beta.app.tar.gz](https://github.com/iam4x/pokemongo-webspoof/releases/download/1.0.1/pokemongo-webspoof_xcode-beta.app.tar.gz)
+:arrow_right: Download last release [pokemongo-webspoof.app.tar.gz (v1.0.2)](https://github.com/iam4x/pokemongo-webspoof/releases/download/1.0.1/pokemongo-webspoof_xcode.app.zip)
 
 ## Features
 
@@ -29,3 +28,17 @@
 4. Check the `Auto update Xcode location` in the app when everything is running
 5. Go back to Xcode, click into menu Debug -> Simulate Location -> pokemonLocation
 6. And voilà, you can move with the arrows key and see your character move
+
+## Known issues
+
+`osascript is not allowed assistive access . (-1719) [...]`
+
+* https://github.com/iam4x/pokemongo-webspoof/issues/5#issuecomment-233106899
+
+`Can't get menu item "pokemonLocation" of menu 1 of menu item "Simulate Location" [...]`
+* https://github.com/iam4x/pokemongo-webspoof/issues/5#issuecomment-233124626
+
+## Credits
+
+* [Pokemon-Go-Controller](https://github.com/kahopoon/Pokemon-Go-Controller) for first proof of concept
+* @Kampfgnom for [his applescript](https://github.com/kahopoon/Pokemon-Go-Controller/issues/29#issue-165194926)
