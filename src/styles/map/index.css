@@ -10,6 +10,6 @@
 
 .google-map-container {
   position: relative;
-  height: 100vh;
-  width: 100%;
+  height: calc(100vh - $sidebar-height);
+  width: 100vw;
 }

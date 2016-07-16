@@ -1,0 +1,19 @@
+@import './server-status.css';
+
+.navbar {
+  background-color: #273135;
+  border-radius: 0;
+  color: #89949B;
+  height: $sidebar-height;
+  padding: 10px;
+  width: 100vw;
+
+  .block {
+    float: 'left';
+    font-size: 12px;
+
+    .title {
+      font-weight: bold;
+    }
+  }
+}
