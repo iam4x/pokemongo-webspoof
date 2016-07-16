@@ -3,7 +3,10 @@
 
 ![Example](./example.gif)
 
-:arrow_right: [Download latest release (v1.0.1)](https://github.com/iam4x/pokemongo-webspoof/releases/download/1.0.1/pokemongo-webspoof.app.zip)
+## Last releases (v1.0.1)
+
+* :arrow_right: [pokemongo-webspoof_xcode.app.zip](https://github.com/iam4x/pokemongo-webspoof/releases/download/1.0.1/pokemongo-webspoof_xcode.app.zip)
+* :arrow_right: [pokemongo-webspoof_xcode-beta.app.tar.gz](https://github.com/iam4x/pokemongo-webspoof/releases/download/1.0.1/pokemongo-webspoof_xcode-beta.app.tar.gz)
 
 ## Features
 
