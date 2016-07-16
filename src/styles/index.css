@@ -1,1 +1,4 @@
+@import './variables.css';
+
 @import './map/index.css';
+@import './navbar/index.css';

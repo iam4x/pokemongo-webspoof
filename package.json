@@ -18,6 +18,9 @@
     "pgws": "./bin/pgws"
   },
   "dependencies": {
+    "axios": "^0.13.0",
+    "cheerio": "^0.20.0",
+    "geocoder": "^0.2.2",
     "tmp": "0.0.28"
   },
   "devDependencies": {
