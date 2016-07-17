@@ -74,7 +74,7 @@ class Map extends Component {
           zoom={ settings.zoom.get() }
           center={ toJS(userLocation) }
           onChange={ this.handleDragMap }
-          options={ () => ({ keyboardShortcuts: false }) }
+          options={ () => ({ keyboardShortcuts: false, draggable: false }) }
           onGoogleApiLoaded={ this.handleGoogleMapLoaded }
           yesIWantToUseGoogleMapApiInternals={ true }>
           <Pokeball lat={ userLocation[0] } lng={ userLocation[1] } />
