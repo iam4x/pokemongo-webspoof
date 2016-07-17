@@ -3,6 +3,7 @@ import { action, observable, computed } from 'mobx'
 import haversine from 'haversine'
 
 import userLocation from './user-location.js'
+import { pushMove } from './last-moves.js'
 
 class Autopilot {
 
@@ -97,6 +98,7 @@ class Autopilot {
     const moveNextPoint = action(() => {
       if (this.steps.length !== -1) {
         const [ { lat: nextLat, lng: nextLng } ] = this.steps
+        pushMove([ nextLat, nextLng ], 3500)
         // move to locaiton
         userLocation.replace([ nextLat, nextLng ])
         // remove first location that we moved to

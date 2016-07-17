@@ -1,17 +1,30 @@
 import { last } from 'lodash'
-import { observable } from 'mobx'
+import { action, observable } from 'mobx'
 import haversine from 'haversine'
 
 import speed from './speed.js'
 import totalDistance from './total-distance.js'
+import userLocation from './user-location.js'
 
 // haversine() seems to returns bigger than expected
 const MAGIC_NUMBER = 1.8
 
 const lastMoves = observable([])
 
+const pushMove = action(([ endLat, endLng ], removeAfter = 2000) => {
+  const [ startLat, startLng ] = userLocation
+
+  const start = { latitude: startLat, longitude: startLng }
+  const end = { latitude: endLat, longitude: endLng }
+
+  const move = { start, end, timestamp: +new Date() }
+  lastMoves.push(move)
+
+  setTimeout(() => lastMoves.remove(move), removeAfter)
+})
+
 const calcUserSpeed = () => {
-  if (lastMoves.length > 5) {
+  if (lastMoves.length > 1) {
     const rangeDistance = haversine(lastMoves[0].start, last(lastMoves).end) / MAGIC_NUMBER
     const totalTime = last(lastMoves).timestamp - lastMoves[0].timestamp
 
@@ -36,4 +49,4 @@ lastMoves.observe(() => {
   totalDistance.set(totalDistance.get() + calcNewDistance())
 })
 
-export default lastMoves
+export default { lastMoves, pushMove }
