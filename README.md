@@ -25,10 +25,11 @@
 
 1. Start Pokémon Go on your iOS device & connect to your Mac
 2. Start the `pokemongo-webspoof` app, it will start also Xcode
-3. Build & run Xcode project on your connected iPhone
-4. Check the `Auto update Xcode location` in the app when everything is running
-5. Go back to Xcode, click into menu Debug -> Simulate Location -> pokemonLocation
-6. And voilà, you can move with the arrows key and see your character move
+3. rename the Bundle Indentifer to something unique and different 
+4. Build & run Xcode project on your connected iPhone
+5. Check the `Auto update Xcode location` in the app when everything is running
+6. Go back to Xcode, click into menu Debug -> Simulate Location -> pokemonLocation
+7. And voilà, you can move with the arrows key and see your character move
 
 ## How-to Update
 
