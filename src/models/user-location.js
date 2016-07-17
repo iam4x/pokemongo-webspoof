@@ -4,6 +4,7 @@ import { observable } from 'mobx'
 import Alert from 'react-s-alert'
 
 import settings from './settings.js'
+import stats from './stats.js'
 
 // electron specific import
 const { writeFile } = window.require('fs')
@@ -40,6 +41,9 @@ const updateXcodeLocation = throttle(([ lat, lng ]) => {
     `<gpx creator="Xcode" version="1.1"><wpt lat="${lat.toFixed(6)}" lon="${lng.toFixed(6)}"><name>PokemonLocation</name></wpt></gpx>`
 
   if (settings.updateXcodeLocation.get()) {
+    // track location changes for total distance & average speed
+    stats.pushMove(lat, lng)
+
     // write `pokemonLocation.gpx` file fro xcode spoof location
     const filePath = resolve(remote.getGlobal('tmpProjectPath'), 'pokemonLocation.gpx')
     writeFile(filePath, xcodeLocationData, async (error) => {

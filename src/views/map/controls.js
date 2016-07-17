@@ -5,7 +5,6 @@ import { observer } from 'mobx-react'
 import cx from 'classnames'
 
 import userLocation from '../../models/user-location.js'
-import { pushMove } from '../../models/last-moves.js'
 import settings from '../../models/settings.js'
 
 const lastMoveDirection = observable(null)
@@ -27,7 +26,6 @@ const handleMove = action((direction) => {
   default: { newLocation = [ userLocation[0] + jitter, userLocation[1] + jitter ] }
   }
 
-  pushMove(newLocation)
   userLocation.replace(newLocation)
 
   // we set `lastMoveDirection` to `null` for react re-render without class `.last`

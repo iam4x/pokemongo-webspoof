@@ -1,11 +1,11 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 
-import speed from '../../models/speed.js'
+import { speed } from '../../models/stats.js'
 
 const SpeedCounter = observer(() =>
   <span className='speed'>
-    { speed.get().toFixed() } km/h
+    { speed.toFixed(1) } km/h
   </span>
 )
 
