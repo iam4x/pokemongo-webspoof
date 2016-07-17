@@ -36,19 +36,45 @@ class Autopilot extends Component {
     autopilot.start()
   }
 
+  renderTogglePause() {
+    if (autopilot.running && !autopilot.paused) {
+      return (
+        <div
+          className='toggle pause btn btn-sm btn-warning'
+          onClick={ autopilot.pause }>
+          <i className='fa fa-pause' />
+        </div>
+      )
+    }
+
+    if (autopilot.paused) {
+      return (
+        <div
+          className='toggle resume btn btn-sm btn-success'
+          onClick={ autopilot.start }>
+          <i className='fa fa-play' />
+        </div>
+      )
+    }
+
+    return <noscript />
+  }
+
   render() {
     return (
       <div className='autopilot'>
-        { autopilot.running ?
-          <div
-            className='autopilot-btn btn btn-sm btn-danger'
-            onClick={ autopilot.stop }>
-            Stop autopilot
-          </div> :
+        { this.renderTogglePause() }
+
+        { !autopilot.running && !autopilot.paused ?
           <div
             className='autopilot-btn btn btn-sm btn-success'
             onClick={ this.openAutoPilotModal }>
              Tesla Autopilot ( ͡° ͜ʖ ͡°)
+          </div> :
+          <div
+            className='autopilot-btn btn btn-sm btn-danger'
+            onClick={ autopilot.stop }>
+            Stop autopilot
           </div> }
 
         <div className={ cx('autopilot-modal', { open: this.isModalOpen }) }>

@@ -8,6 +8,7 @@ class Autopilot {
 
   timeout = null // inner setTimout to move next location
 
+  @observable paused = false
   @observable running = false // is the autopilot running
   @observable steps = [] // coordinate steps to go to destination
   @observable speed = 0.003 // 0.003 ~= 3m/s ~= 12 km/h
@@ -93,6 +94,7 @@ class Autopilot {
   // move every second to next location into `this.steps`
   start = () => {
     this.running = true
+    this.paused = false
 
     const moveNextPoint = action(() => {
       if (this.steps.length !== -1) {
@@ -113,6 +115,13 @@ class Autopilot {
     })
 
     moveNextPoint()
+  }
+
+  @action pause = () => {
+    clearTimeout(this.timeout)
+    this.timeout = null
+    this.running = false
+    this.paused = true
   }
 
   // reset all store state
