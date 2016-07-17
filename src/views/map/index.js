@@ -37,12 +37,7 @@ class Map extends Component {
     userLocation.replace([ latitude, longitude ])
   }
 
-  @action handleDragMap = ({ center: { lat: latitude, lng: longitude }, zoom: newZoom }) => {
-    if (latitude !== userLocation[0] ||
-        longitude !== userLocation[1]) {
-      userLocation.replace([ latitude, longitude ])
-    }
-
+  @action handleDragMap = ({ zoom: newZoom }) => {
     if (newZoom !== settings.zoom.get()) {
       settings.zoom.set(newZoom)
 
