@@ -25,10 +25,11 @@
 
 1. Start Pokémon Go on your iOS device & connect to your Mac
 2. Start the `pokemongo-webspoof` app, it will start also Xcode
-3. Build & run Xcode project on your connected iPhone
-4. Check the `Auto update Xcode location` in the app when everything is running
-5. Go back to Xcode, click into menu Debug -> Simulate Location -> pokemonLocation
-6. And voilà, you can move with the arrows key and see your character move
+3. Rename the Bundle Indentifer to something unique and different 
+4. Build & run Xcode project on your connected iPhone
+5. Check the `Auto update Xcode location` in the app when everything is running
+6. Go back to Xcode, click into menu Debug -> Simulate Location -> pokemonLocation
+7. And voilà, you can move with the arrows key and see your character move
 
 ## How-to Update
 
@@ -48,6 +49,14 @@
 
 `Can't get menu item "pokemonLocation" of menu 1 of menu item "Simulate Location" [...]`
 * https://github.com/iam4x/pokemongo-webspoof/issues/5#issuecomment-233124626
+
+`"Failed to code sign "pokemon-webspoof.`
+`No non–expired provisioning profiles were found.`
+`Xcode can attempt to fix this issue. This will reset your code signing and provisioning settings to recommended values and` `resolve issues with signing identities and provisioning profiles."`
+* https://github.com/iam4x/pokemongo-webspoof/issues/16#issuecomment-233197020
+
+
+
 
 ## Credits
 
