@@ -37,7 +37,7 @@ const validateCoordinates = ((change) => {
 
 const updateXcodeLocation = throttle(([ lat, lng ]) => {
   const xcodeLocationData =
-    `<gpx creator="Xcode" version="1.1"><wpt lat="${lat}" lon="${lng}"><name>PokemonLocation</name></wpt></gpx>`
+    `<gpx creator="Xcode" version="1.1"><wpt lat="${lat.toFixed(6)}" lon="${lng.toFixed(6)}"><name>PokemonLocation</name></wpt></gpx>`
 
   if (settings.updateXcodeLocation.get()) {
     // write `pokemonLocation.gpx` file fro xcode spoof location
