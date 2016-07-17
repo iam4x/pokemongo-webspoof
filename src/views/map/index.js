@@ -16,6 +16,7 @@ import SpeedLimit from './speed-limit.js'
 import Controls from './controls.js'
 import TotalDistance from './total-distance.js'
 import Autopilot from './autopilot.js'
+import Pokeball from './pokeball.js'
 
 const isLoading = observable(true)
 
@@ -75,7 +76,9 @@ class Map extends Component {
           onChange={ this.handleDragMap }
           options={ () => ({ keyboardShortcuts: false }) }
           onGoogleApiLoaded={ this.handleGoogleMapLoaded }
-          yesIWantToUseGoogleMapApiInternals={ true } />
+          yesIWantToUseGoogleMapApiInternals={ true }>
+          <Pokeball lat={ userLocation[0] } lng={ userLocation[1] } />
+        </GoogleMap>
 
         { /* controls, settings displayed on top of the map */ }
         <Coordinates />
@@ -86,9 +89,6 @@ class Map extends Component {
         <Controls />
         <TotalDistance />
         <Autopilot />
-
-        { /* pokéball in center of map */ }
-        <img alt='pokeball' className='pokeball' src='./pokeball.png' />
       </div>
     )
   }

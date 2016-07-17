@@ -1,7 +1,4 @@
 .pokeball {
-  position: absolute;
-  top: calc(50% - 20px);
-  left: calc((100vw - 20px) / 2);
   height: 20px;
   width: 20px;
 }
