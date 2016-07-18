@@ -27,7 +27,7 @@
 		46119DE11D397DE2005433C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46119DE41D397DE2005433C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		46119DE61D397DE2005433C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		46119DEC1D397E7E005433C8 /* pokemonLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text; name = pokemonLocation.gpx; path = "../pokemonLocation.gpx"; sourceTree = "<group>"; };
+		46119DEC1D397E7E005433C8 /* pokemonLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text; name = pokemonLocation.gpx; path = ../pokemonLocation.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +114,11 @@
 				TargetAttributes = {
 					46119DD11D397DE2005433C8 = {
 						CreatedOnToolsVersion = 7.3.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
