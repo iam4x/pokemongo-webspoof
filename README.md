@@ -25,7 +25,7 @@
 
 1. Start Pokémon Go on your iOS device & connect to your Mac
 2. Start the `pokemongo-webspoof` app, it will start also Xcode
-3. Rename the Bundle Indentifer to something unique and different 
+3. Rename the Bundle Indentifer to something unique and different
 4. Build & run Xcode project on your connected iPhone
 5. Check the `Auto update Xcode location` in the app when everything is running
 6. Go back to Xcode, click into menu Debug -> Simulate Location -> pokemonLocation
@@ -39,6 +39,15 @@
 3. Download latest release
 4. Add back new `pokemongo-webspoof.app` to authorized app to Accessibility
   * (System Preferences -> Security & Privacy -> Privacy Tab -> Accessibility)
+
+## Develop
+
+* Download nodejs^6 (https://nodejs.org/en/)
+* `$ git clone git@github.com:iam4x/pokemongo-webspoof.git`
+* `$ cd pokemongo-webspoof && npm install`
+* `$ npm run dev`
+
+Happy hacking 👍
 
 ## Known issues
 
@@ -59,7 +68,6 @@
 `Message from debugger: Terminated due to memory issue`
 
 * https://github.com/iam4x/pokemongo-webspoof/issues/31
-
 
 ## Credits
 
