@@ -55,7 +55,10 @@
 `Xcode can attempt to fix this issue. This will reset your code signing and provisioning settings to recommended values and` `resolve issues with signing identities and provisioning profiles."`
 * https://github.com/iam4x/pokemongo-webspoof/issues/16#issuecomment-233197020
 
+`Application has finished running`
+`Message from debugger: Terminated due to memory issue`
 
+* https://github.com/iam4x/pokemongo-webspoof/issues/31
 
 
 ## Credits
