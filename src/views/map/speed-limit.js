@@ -4,7 +4,7 @@ import cx from 'classnames'
 
 import { speedLimit } from '../../models/settings.js'
 
-const presets = [ [ '50-30', 2 ], [ '30-20', 3 ], [ '20-10', 4 ] ]
+const presets = [ [ '6-3', 2 ], [ '3-2', 3 ], [ '2-1', 4 ] ]
 
 const SpeedLimit = observer(() =>
   <div className='speed-limit btn-group btn-group-sm'>
@@ -17,7 +17,7 @@ const SpeedLimit = observer(() =>
           'btn-primary': coeff === speedLimit.get(),
           'btn-secondary': coeff !== speedLimit.get()
         }) }>
-        ~{ limit } km/h
+        ~{ limit } meter/step
       </button>
     ) }
   </div>
