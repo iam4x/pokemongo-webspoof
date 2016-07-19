@@ -18,29 +18,24 @@ class Autopilot extends Component {
     this.placesAutocomplete.on('change', this.handleSuggestionChange)
   }
 
-  @action openAutoPilotModal = () => {
-    this.isModalOpen = true
-  }
-
   @action handleSuggestionChange = ({ suggestion: { latlng: { lat, lng } } }) => {
+    if (!this.isModalOpen) this.isModalOpen = true
     autopilot.scheduleTrip(lat, lng)
   }
 
-  @action handleStartAutopilot = (e) => {
-    e.preventDefault()
-
+  @action handleStartAutopilot = () => {
     // reset modal state
     this.placesAutocomplete.setVal(null)
-    this.isModalOpen = false
-
     autopilot.start()
+
+    this.isModalOpen = false
   }
 
   renderTogglePause() {
     if (autopilot.running && !autopilot.paused) {
       return (
         <div
-          className='toggle pause btn btn-sm btn-warning'
+          className='toggle pause btn btn-warning'
           onClick={ autopilot.pause }>
           <i className='fa fa-pause' />
         </div>
@@ -50,7 +45,7 @@ class Autopilot extends Component {
     if (autopilot.paused) {
       return (
         <div
-          className='toggle resume btn btn-sm btn-success'
+          className='toggle resume btn btn-success'
           onClick={ autopilot.start }>
           <i className='fa fa-play' />
         </div>
@@ -65,23 +60,18 @@ class Autopilot extends Component {
       <div className='autopilot'>
         { this.renderTogglePause() }
 
-        { !autopilot.running && !autopilot.paused ?
+        <div className={ cx('algolia-places', { hide: !autopilot.clean }) }>
+          <input ref='placesEl' type='search' placeholder='Destination' />
+        </div>
+
+        { !autopilot.clean &&
           <div
-            className='autopilot-btn btn btn-sm btn-success'
-            onClick={ this.openAutoPilotModal }>
-             Tesla Autopilot ( ͡° ͜ʖ ͡°)
-          </div> :
-          <div
-            className='autopilot-btn btn btn-sm btn-danger'
+            className='autopilot-btn btn btn-danger'
             onClick={ autopilot.stop }>
             Stop autopilot
           </div> }
 
         <div className={ cx('autopilot-modal', { open: this.isModalOpen }) }>
-          <div className='algolia-places'>
-            <input ref='placesEl' type='search' placeholder='Destination' />
-          </div>
-
           { autopilot.steps.length ?
             <div className='infos'>
               <hr />

@@ -14,6 +14,10 @@ class Autopilot {
   @observable speed = 0.003 // 0.003 ~= 3m/s ~= 12 km/h
   @observable distance = 0 // remaining distance to arrival in km
 
+  @computed get clean() {
+    return !this.running && !this.paused
+  }
+
   @computed get time() {
     const hours = Math.floor(this.distance / 12)
     const minutes = Math.floor(((this.distance / 12) * 60) % 60)

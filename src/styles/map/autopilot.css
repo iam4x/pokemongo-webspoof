@@ -1,18 +1,19 @@
 .autopilot {
-  .toggle {
-    position: absolute;
-    right: 50px;
-    bottom: 23px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  .algolia-places {
+    width: 330px;
+
+    &.hide {
+      display: none;
+    }
   }
 
   &-btn {
-    position: absolute;
-    right: 50px;
-    bottom: 23px;
-
-    &.btn-danger {
-      right: 90px;
-    }
+    float: left;
+    margin-right: 10px;
   }
 
   &-modal {

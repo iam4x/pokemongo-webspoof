@@ -8,7 +8,6 @@ import { observer } from 'mobx-react'
 import userLocation from '../../models/user-location.js'
 import settings from '../../models/settings.js'
 
-import GoToPlace from './go-to-place.js'
 import SpeedCounter from './speed-counter.js'
 import BooleanSettings from './boolean-settings.js'
 import Coordinates from './coordinates.js'
@@ -82,7 +81,6 @@ class Map extends Component {
 
         { /* controls, settings displayed on top of the map */ }
         <Coordinates />
-        <GoToPlace />
         <SpeedCounter />
         <SpeedLimit />
         <BooleanSettings />
