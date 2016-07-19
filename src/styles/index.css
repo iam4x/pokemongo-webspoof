@@ -2,3 +2,7 @@
 
 @import './map/index.css';
 @import './navbar/index.css';
+
+.text-center {
+  text-align: center;
+}

@@ -1,11 +1,11 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 
-import totalDistance from '../../models/total-distance.js'
+import { totalDistance } from '../../models/stats.js'
 
 const TotalDistance = observer(() =>
   <div className='total-distance'>
-    { totalDistance.get().toFixed(2) } km
+    { totalDistance.toFixed(3) } km
   </div>
 )
 

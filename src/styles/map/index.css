@@ -1,15 +1,15 @@
 @import './boolean-settings.css';
 @import './controls.css';
 @import './coordinates.css';
-@import './go-to-places.css';
 @import './pokeball.css';
 @import './speed-limit.css';
 @import './speed.css';
 @import './total-distance.css';
 @import './alerts.css';
+@import './autopilot.css';
 
 .google-map-container {
   position: relative;
-  height: calc(100vh - $sidebar-height);
+  height: calc(100vh - $navbar-height);
   width: 100vw;
 }

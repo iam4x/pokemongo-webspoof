@@ -8,13 +8,14 @@ import { observer } from 'mobx-react'
 import userLocation from '../../models/user-location.js'
 import settings from '../../models/settings.js'
 
-import GoToPlace from './go-to-place.js'
 import SpeedCounter from './speed-counter.js'
 import BooleanSettings from './boolean-settings.js'
 import Coordinates from './coordinates.js'
 import SpeedLimit from './speed-limit.js'
 import Controls from './controls.js'
 import TotalDistance from './total-distance.js'
+import Autopilot from './autopilot.js'
+import Pokeball from './pokeball.js'
 
 const isLoading = observable(true)
 
@@ -36,12 +37,7 @@ class Map extends Component {
     userLocation.replace([ latitude, longitude ])
   }
 
-  @action handleDragMap = ({ center: { lat: latitude, lng: longitude }, zoom: newZoom }) => {
-    if (latitude !== userLocation[0] ||
-        longitude !== userLocation[1]) {
-      userLocation.replace([ latitude, longitude ])
-    }
-
+  @action handleDragMap = ({ zoom: newZoom }) => {
     if (newZoom !== settings.zoom.get()) {
       settings.zoom.set(newZoom)
 
@@ -77,21 +73,20 @@ class Map extends Component {
           zoom={ settings.zoom.get() }
           center={ toJS(userLocation) }
           onChange={ this.handleDragMap }
-          options={ () => ({ keyboardShortcuts: false }) }
+          options={ () => ({ keyboardShortcuts: false, draggable: false }) }
           onGoogleApiLoaded={ this.handleGoogleMapLoaded }
-          yesIWantToUseGoogleMapApiInternals={ true } />
+          yesIWantToUseGoogleMapApiInternals={ true }>
+          <Pokeball lat={ userLocation[0] } lng={ userLocation[1] } />
+        </GoogleMap>
 
         { /* controls, settings displayed on top of the map */ }
         <Coordinates />
-        <GoToPlace />
         <SpeedCounter />
         <SpeedLimit />
         <BooleanSettings />
         <Controls />
         <TotalDistance />
-
-        { /* pokéball in center of map */ }
-        <img alt='pokeball' className='pokeball' src='./pokeball.png' />
+        <Autopilot />
       </div>
     )
   }
