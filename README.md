@@ -49,6 +49,8 @@
 * `$ cd pokemongo-webspoof && npm install`
 * `$ npm run dev`
 
+If you have an issue Xcode2 check https://github.com/iam4x/pokemongo-webspoof/issues/5#issuecomment-233669078
+
 Happy hacking 👍
 
 ## Known issues
