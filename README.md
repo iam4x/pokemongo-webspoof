@@ -15,6 +15,7 @@
 * Total distance counter (it differs from Pokémon Go incubator counter?)
 * Current speed counter
 * Include Pokémon spots from a [collaborative map](https://www.google.com/maps/d/u/0/viewer?mid=1vsj869Axn9JdWairc4xU6E_0DhE&hl=en_US) (might not be accurate, will update)
+* Autopilot walk / subway & teleport ([gif example](https://cloud.githubusercontent.com/assets/893837/16966268/0dc2bc02-4e04-11e6-9826-8a844d6f897c.gif))
 
 ## Requirements
 
