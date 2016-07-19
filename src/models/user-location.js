@@ -40,23 +40,20 @@ const updateXcodeLocation = throttle(([ lat, lng ]) => {
   const xcodeLocationData =
     `<gpx creator="Xcode" version="1.1"><wpt lat="${lat.toFixed(6)}" lon="${lng.toFixed(6)}"><name>PokemonLocation</name></wpt></gpx>`
 
-  if (settings.updateXcodeLocation.get()) {
-    // track location changes for total distance & average speed
-    stats.pushMove(lat, lng)
+  // write `pokemonLocation.gpx` file fro xcode spoof location
+  const filePath = resolve(remote.getGlobal('tmpProjectPath'), 'pokemonLocation.gpx')
+  writeFile(filePath, xcodeLocationData, async (error) => {
+    if (error) {
+      Alert.error(`
+        <strong>Error writting 'pokemonLocation.gpx' to file</strong>
+        <div class='stack'>${error.message}</div>
+        <div class='stack'>${error.stack}</div>
+      `)
 
-    // write `pokemonLocation.gpx` file fro xcode spoof location
-    const filePath = resolve(remote.getGlobal('tmpProjectPath'), 'pokemonLocation.gpx')
-    writeFile(filePath, xcodeLocationData, async (error) => {
-      if (error) {
-        Alert.error(`
-          <strong>Error writting 'pokemonLocation.gpx' to file</strong>
-          <div class='stack'>${error.message}</div>
-          <div class='stack'>${error.stack}</div>
-        `)
+      return console.warn(error)
+    }
 
-        return console.warn(error)
-      }
-
+    if (settings.updateXcodeLocation.get()) {
       // reload location into xcode
       const scriptPath = resolve(window.__dirname, 'autoclick.applescript')
       exec(`osascript ${scriptPath}`, (autoclickErr, stdout, stderr) => {
@@ -68,9 +65,12 @@ const updateXcodeLocation = throttle(([ lat, lng ]) => {
 
           return console.warn(stderr)
         }
+
+        // track location changes for total distance & average speed
+        stats.pushMove(lat, lng)
       })
-    })
-  }
+    }
+  })
 }, 1000)
 
 userLocation.intercept(validateCoordinates)
