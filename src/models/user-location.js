@@ -37,6 +37,9 @@ const validateCoordinates = ((change) => {
 })
 
 const updateXcodeLocation = throttle(([ lat, lng ]) => {
+  // track location changes for total distance & average speed
+  stats.pushMove(lat, lng)
+
   const xcodeLocationData =
     `<gpx creator="Xcode" version="1.1"><wpt lat="${lat.toFixed(6)}" lon="${lng.toFixed(6)}"><name>PokemonLocation</name></wpt></gpx>`
 
@@ -65,9 +68,6 @@ const updateXcodeLocation = throttle(([ lat, lng ]) => {
 
           return console.warn(stderr)
         }
-
-        // track location changes for total distance & average speed
-        stats.pushMove(lat, lng)
       })
     }
   })

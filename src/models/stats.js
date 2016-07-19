@@ -2,6 +2,8 @@ import { last, omit } from 'lodash'
 import { observable, action, computed } from 'mobx'
 import haversine from 'haversine'
 
+import { updateXcodeLocation } from './settings.js'
+
 class Stats {
 
   timeout = null
@@ -40,7 +42,7 @@ class Stats {
 
     const move = { latitude, longitude, timestamp: +new Date() }
 
-    if (this.lastLocation) {
+    if (this.lastLocation && updateXcodeLocation.get()) {
       this.totalDistance = this.totalDistance + haversine(this.lastLocation, move)
     }
 

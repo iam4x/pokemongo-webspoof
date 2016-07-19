@@ -5,7 +5,7 @@ import { totalDistance } from '../../models/stats.js'
 
 const TotalDistance = observer(() =>
   <div className='total-distance'>
-    { totalDistance.toFixed(3) } km
+    { totalDistance.toFixed(2) } km
   </div>
 )
 
