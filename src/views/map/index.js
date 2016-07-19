@@ -22,6 +22,13 @@ const isLoading = observable(true)
 @observer
 class Map extends Component {
 
+  map = null
+
+  @observable mapOptions = {
+    keyboardShortcuts: false,
+    draggable: false
+  }
+
   componentWillMount() {
     // get user geolocation
     if (navigator.geolocation) {
@@ -54,6 +61,7 @@ class Map extends Component {
   /* eslint max-len: 0 */
   /* eslint no-new: 0 */
   @action handleGoogleMapLoaded = (({ map }) => {
+    this.map = map
     const lastLocation = toJS(userLocation)
 
     // load pokemon spots map
@@ -65,6 +73,11 @@ class Map extends Component {
     userLocation.replace(lastLocation)
   })
 
+  @action toggleMapDrag = () => {
+    this.mapOptions.draggable = !this.mapOptions.draggable
+    this.map.setOptions(toJS(this.mapOptions))
+  }
+
   render() {
     return (
       <div className='google-map-container'>
@@ -73,11 +86,25 @@ class Map extends Component {
           zoom={ settings.zoom.get() }
           center={ toJS(userLocation) }
           onChange={ this.handleDragMap }
-          options={ () => ({ keyboardShortcuts: false, draggable: false }) }
+          options={ () => this.mapOptions }
           onGoogleApiLoaded={ this.handleGoogleMapLoaded }
           yesIWantToUseGoogleMapApiInternals={ true }>
           <Pokeball lat={ userLocation[0] } lng={ userLocation[1] } />
         </GoogleMap>
+
+        <div className='btn btn-drag-map'>
+          { this.mapOptions.draggable ?
+            <div
+              className='btn btn-sm btn-primary'
+              onClick={ this.toggleMapDrag }>
+              Map draggable
+            </div> :
+            <div
+              className='btn btn-sm btn-secondary'
+              onClick={ this.toggleMapDrag }>
+              Map locked
+            </div> }
+        </div>
 
         { /* controls, settings displayed on top of the map */ }
         <Coordinates />

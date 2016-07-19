@@ -12,4 +12,10 @@
   position: relative;
   height: calc(100vh - $navbar-height);
   width: 100vw;
+
+  .btn-drag-map {
+    position: absolute;
+    bottom: 14px;
+    right: 30px;
+  }
 }
