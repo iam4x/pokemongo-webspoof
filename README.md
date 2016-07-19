@@ -36,9 +36,9 @@
 
 ## How-to Update
 
-1. Delete `pokemongo-webspoof.app` from your computer
-2. Remove `pokemongo-webspoof.app` from authorized app to Accessibility
+1. Remove `pokemongo-webspoof.app` from authorized app to Accessibility
   * (System Preferences -> Security & Privacy -> Privacy Tab -> Accessibility)
+2. Delete `pokemongo-webspoof.app` from your computer
 3. Download latest release
 4. Add back new `pokemongo-webspoof.app` to authorized app to Accessibility
   * (System Preferences -> Security & Privacy -> Privacy Tab -> Accessibility)
