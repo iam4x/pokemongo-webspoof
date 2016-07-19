@@ -1,6 +1,7 @@
 import { times } from 'lodash'
 import { action, observable, computed } from 'mobx'
 import haversine from 'haversine'
+import Alert from 'react-s-alert'
 
 import userLocation from './user-location.js'
 
@@ -10,17 +11,32 @@ class Autopilot {
 
   @observable paused = false
   @observable running = false // is the autopilot running
-  @observable steps = [] // coordinate steps to go to destination
-  @observable speed = 0.003 // 0.003 ~= 3m/s ~= 12 km/h
+  @observable steps = []
+  @observable speed = 12 / 3600 // 0.0033 ~= 3,3m/s ~= 12 km/h
   @observable distance = 0 // remaining distance to arrival in km
+  @observable rawOverviewPath = null // save last query to re-calculate optimized route
+
+  @computed get accurateSteps() {
+    if (this.rawOverviewPath) {
+      const { steps } = this.calculateIntermediateSteps(this.rawOverviewPath)
+      return steps
+    } else {
+      return []
+    }
+  }
 
   @computed get clean() {
     return !this.running && !this.paused
   }
 
   @computed get time() {
-    const hours = Math.floor(this.distance / 12)
-    const minutes = Math.floor(((this.distance / 12) * 60) % 60)
+    const speed = this.speed * 3600 // to km/h
+    const hours = Math.floor(this.distance / speed)
+    const minutes = Math.floor(((this.distance / speed) * 60) % 60)
+
+    if (isNaN(hours) || isNaN(minutes)) {
+      return '0 minutes'
+    }
 
     if (hours >= 1) {
       return `${hours}h ${minutes} minutes`
@@ -45,54 +61,72 @@ class Autopilot {
     directionsService.route(directionsRequest, (response, status) => {
       if (status === maps.DirectionsStatus.OK) {
         const { routes: [ { overview_path } ] } = response
+        this.rawOverviewPath = overview_path
         return resolve(overview_path)
       }
 
+      this.rawOverviewPath = null
       return reject(status)
     })
   })
 
-  calculateIntermediateSteps = (foundPath) => foundPath.reduce(
-    (result, { lat: endLat, lng: endLng }, idx) => {
-      if (idx > 0) {
-        const { lat: startLat, lng: startLng } = foundPath[idx - 1]
+  calculateIntermediateSteps = (foundPath) =>
+    foundPath.reduce(
+      (result, { lat: endLat, lng: endLng }, idx) => {
+        if (idx > 0) {
+          const { lat: startLat, lng: startLng } = foundPath[idx - 1]
 
-        const pendingDistance = haversine(
-          { latitude: startLat(), longitude: startLng() },
-          { latitude: endLat(), longitude: endLng() }
-        )
+          const pendingDistance = haversine(
+            { latitude: startLat(), longitude: startLng() },
+            { latitude: endLat(), longitude: endLng() }
+          )
 
-        // 0.003 ~= 3m/s ~= 12 km/h
-        const splitInto = (pendingDistance / this.speed).toFixed()
+          if (isNaN(this.speed)) {
+            return {
+              distance: result.distance + pendingDistance,
+              steps: [ { lat: endLat(), lng: endLng() } ]
+            }
+          }
 
-        const latSteps = (Math.abs(startLat() - endLat())) / splitInto
-        const lngSteps = (Math.abs(startLng() - endLng())) / splitInto
+          // 0.003 ~= 3m/s ~= 12 km/h
+          const splitInto = (pendingDistance / this.speed).toFixed()
 
-        const stepsInBetween = times(splitInto, (step) => {
-          const calculatedLat = (startLat() > endLat()) ?
-            startLat() - (latSteps * step) : startLat() + (latSteps * step)
-          const calculatedLng = (startLng() > endLng()) ?
-            startLng() - (lngSteps * step) : startLng() + (lngSteps * step)
+          const latSteps = (Math.abs(startLat() - endLat())) / splitInto
+          const lngSteps = (Math.abs(startLng() - endLng())) / splitInto
 
-          return { lat: calculatedLat, lng: calculatedLng }
-        })
+          const stepsInBetween = times(splitInto, (step) => {
+            const calculatedLat = (startLat() > endLat()) ?
+              startLat() - (latSteps * step) : startLat() + (latSteps * step)
+            const calculatedLng = (startLng() > endLng()) ?
+              startLng() - (lngSteps * step) : startLng() + (lngSteps * step)
 
-        return {
-          distance: result.distance + pendingDistance,
-          steps: [ ...result.steps, ...stepsInBetween ]
+            return { lat: calculatedLat, lng: calculatedLng }
+          })
+
+          return {
+            distance: result.distance + pendingDistance,
+            steps: [ ...result.steps, ...stepsInBetween ]
+          }
         }
-      }
-      return result
-    },
-    { distance: 0, steps: [] }
-  )
+        return result
+      },
+      { distance: 0, steps: [] }
+    )
 
   @action scheduleTrip = async (lat, lng) => {
-    const foundPath = await this.findDirectionPath(lat, lng)
-    const { distance, steps } = this.calculateIntermediateSteps(foundPath)
+    try {
+      const foundPath = await this.findDirectionPath(lat, lng)
+      const { distance } = this.calculateIntermediateSteps(foundPath)
 
-    this.steps.replace(steps)
-    this.distance = distance
+      this.distance = distance
+    } catch (error) {
+      Alert.error(`
+        <strong>Error with schedule trip</strong>
+        <div class='stack'>${error}</div>
+      `)
+
+      throw error
+    }
   }
 
   // move every second to next location into `this.steps`
@@ -132,6 +166,7 @@ class Autopilot {
   @action stop = () => {
     clearTimeout(this.timeout)
     this.timeout = null
+    this.paused = false
     this.running = false
     this.distance = 0
     this.steps.clear()

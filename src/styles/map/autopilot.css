@@ -25,12 +25,28 @@
     padding: 10px;
     top: calc(50vh - (300px / 2) - $navbar-height);
     left: calc(50vw - (600px / 2));
-    height: 300px;
     width: 600px;
     z-index: 9999;
 
     &.open{
       display: block;
+    }
+
+    .travel-mode {
+      cursor: pointer;
+
+      &.selected {
+        border: 1px solid #0275d8 !important;
+      }
+
+      .fa {
+        font-size: 60px;
+        margin-bottom: 10px;
+      }
+    }
+
+    button {
+      margin-top: 20px;
     }
   }
 }
