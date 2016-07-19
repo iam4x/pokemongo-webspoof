@@ -31,6 +31,8 @@
 6. Go back to Xcode, click into menu Debug -> Simulate Location -> pokemonLocation
 7. And voilà, you can move with the arrows key and see your character move
 
+**NOTE:** You can also use your keyboard arrows to move on the map 👍
+
 ## How-to Update
 
 1. Delete `pokemongo-webspoof.app` from your computer
