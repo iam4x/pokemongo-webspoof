@@ -1,6 +1,6 @@
 {
   "name": "pokemongo-webspoof",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Spoof your iOS device GPS location for Pokémon Go",
   "main": "main.js",
   "scripts": {

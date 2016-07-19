@@ -5,7 +5,7 @@
 
 ![Example](./example.gif)
 
-* :arrow_right: Download last release [pokemongo-webspoof.app.tar.gz (v1.0.2)](https://github.com/iam4x/pokemongo-webspoof/releases/download/v1.0.2/pokemongo-webspoof.app.tar.gz)
+* :arrow_right: Download last release [pokemongo-webspoof.app.tar.gz (v1.1.0)](https://github.com/iam4x/pokemongo-webspoof/releases/download/v1.0.3/pokemongo-webspoof-v110.app.tar.gz)
 * :arrow_right: Changelog is available [here](https://github.com/iam4x/pokemongo-webspoof/releases)
 
 ## Features
@@ -68,11 +68,6 @@ Happy hacking 👍
 `No non–expired provisioning profiles were found.`
 `Xcode can attempt to fix this issue. This will reset your code signing and provisioning settings to recommended values and` `resolve issues with signing identities and provisioning profiles."`
 * https://github.com/iam4x/pokemongo-webspoof/issues/16#issuecomment-233197020
-
-`Application has finished running`
-`Message from debugger: Terminated due to memory issue`
-
-* https://github.com/iam4x/pokemongo-webspoof/issues/31
 
 ## Credits
 
