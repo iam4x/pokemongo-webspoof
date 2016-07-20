@@ -8,18 +8,26 @@ import { observer } from 'mobx-react'
 import userLocation from '../../models/user-location.js'
 import settings from '../../models/settings.js'
 
-import GoToPlace from './go-to-place.js'
 import SpeedCounter from './speed-counter.js'
 import BooleanSettings from './boolean-settings.js'
 import Coordinates from './coordinates.js'
 import SpeedLimit from './speed-limit.js'
 import Controls from './controls.js'
 import TotalDistance from './total-distance.js'
+import Autopilot from './autopilot.js'
+import Pokeball from './pokeball.js'
 
 const isLoading = observable(true)
 
 @observer
 class Map extends Component {
+
+  map = null
+
+  @observable mapOptions = {
+    keyboardShortcuts: false,
+    draggable: false
+  }
 
   componentWillMount() {
     // get user geolocation
@@ -36,12 +44,7 @@ class Map extends Component {
     userLocation.replace([ latitude, longitude ])
   }
 
-  @action handleDragMap = ({ center: { lat: latitude, lng: longitude }, zoom: newZoom }) => {
-    if (latitude !== userLocation[0] ||
-        longitude !== userLocation[1]) {
-      userLocation.replace([ latitude, longitude ])
-    }
-
+  @action handleDragMap = ({ zoom: newZoom }) => {
     if (newZoom !== settings.zoom.get()) {
       settings.zoom.set(newZoom)
 
@@ -58,6 +61,7 @@ class Map extends Component {
   /* eslint max-len: 0 */
   /* eslint no-new: 0 */
   @action handleGoogleMapLoaded = (({ map }) => {
+    this.map = map
     const lastLocation = toJS(userLocation)
 
     // load pokemon spots map
@@ -69,6 +73,11 @@ class Map extends Component {
     userLocation.replace(lastLocation)
   })
 
+  @action toggleMapDrag = () => {
+    this.mapOptions.draggable = !this.mapOptions.draggable
+    this.map.setOptions(toJS(this.mapOptions))
+  }
+
   render() {
     return (
       <div className='google-map-container'>
@@ -77,21 +86,34 @@ class Map extends Component {
           zoom={ settings.zoom.get() }
           center={ toJS(userLocation) }
           onChange={ this.handleDragMap }
-          options={ () => ({ keyboardShortcuts: false }) }
+          options={ () => this.mapOptions }
           onGoogleApiLoaded={ this.handleGoogleMapLoaded }
-          yesIWantToUseGoogleMapApiInternals={ true } />
+          yesIWantToUseGoogleMapApiInternals={ true }>
+          <Pokeball lat={ userLocation[0] } lng={ userLocation[1] } />
+        </GoogleMap>
+
+        <div className='btn btn-drag-map'>
+          { this.mapOptions.draggable ?
+            <div
+              className='btn btn-sm btn-primary'
+              onClick={ this.toggleMapDrag }>
+              Map draggable
+            </div> :
+            <div
+              className='btn btn-sm btn-secondary'
+              onClick={ this.toggleMapDrag }>
+              Map locked
+            </div> }
+        </div>
 
         { /* controls, settings displayed on top of the map */ }
         <Coordinates />
-        <GoToPlace />
         <SpeedCounter />
         <SpeedLimit />
         <BooleanSettings />
         <Controls />
         <TotalDistance />
-
-        { /* pokéball in center of map */ }
-        <img alt='pokeball' className='pokeball' src='./pokeball.png' />
+        <Autopilot />
       </div>
     )
   }

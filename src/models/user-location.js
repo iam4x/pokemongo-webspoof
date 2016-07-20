@@ -4,6 +4,7 @@ import { observable } from 'mobx'
 import Alert from 'react-s-alert'
 
 import settings from './settings.js'
+import stats from './stats.js'
 
 // electron specific import
 const { writeFile } = window.require('fs')
@@ -36,23 +37,26 @@ const validateCoordinates = ((change) => {
 })
 
 const updateXcodeLocation = throttle(([ lat, lng ]) => {
+  // track location changes for total distance & average speed
+  stats.pushMove(lat, lng)
+
   const xcodeLocationData =
-    `<gpx creator="Xcode" version="1.1"><wpt lat="${lat}" lon="${lng}"><name>PokemonLocation</name></wpt></gpx>`
+    `<gpx creator="Xcode" version="1.1"><wpt lat="${lat.toFixed(6)}" lon="${lng.toFixed(6)}"><name>PokemonLocation</name></wpt></gpx>`
 
-  if (settings.updateXcodeLocation.get()) {
-    // write `pokemonLocation.gpx` file fro xcode spoof location
-    const filePath = resolve(remote.getGlobal('tmpProjectPath'), 'pokemonLocation.gpx')
-    writeFile(filePath, xcodeLocationData, async (error) => {
-      if (error) {
-        Alert.error(`
-          <strong>Error writting 'pokemonLocation.gpx' to file</strong>
-          <div class='stack'>${error.message}</div>
-          <div class='stack'>${error.stack}</div>
-        `)
+  // write `pokemonLocation.gpx` file fro xcode spoof location
+  const filePath = resolve(remote.getGlobal('tmpProjectPath'), 'pokemonLocation.gpx')
+  writeFile(filePath, xcodeLocationData, async (error) => {
+    if (error) {
+      Alert.error(`
+        <strong>Error writting 'pokemonLocation.gpx' to file</strong>
+        <div class='stack'>${error.message}</div>
+        <div class='stack'>${error.stack}</div>
+      `)
 
-        return console.warn(error)
-      }
+      return console.warn(error)
+    }
 
+    if (settings.updateXcodeLocation.get()) {
       // reload location into xcode
       const scriptPath = resolve(window.__dirname, 'autoclick.applescript')
       exec(`osascript ${scriptPath}`, (autoclickErr, stdout, stderr) => {
@@ -65,8 +69,8 @@ const updateXcodeLocation = throttle(([ lat, lng ]) => {
           return console.warn(stderr)
         }
       })
-    })
-  }
+    }
+  })
 }, 1000)
 
 userLocation.intercept(validateCoordinates)

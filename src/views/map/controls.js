@@ -5,21 +5,9 @@ import { observer } from 'mobx-react'
 import cx from 'classnames'
 
 import userLocation from '../../models/user-location.js'
-import lastMoves from '../../models/last-moves.js'
 import settings from '../../models/settings.js'
 
 const lastMoveDirection = observable(null)
-
-const pushLastMoves = (newLocation) => {
-  const start = { latitude: userLocation[0], longitude: userLocation[1] }
-  const end = { latitude: newLocation[0], longitude: newLocation[1] }
-
-  const lastMove = { start, end, timestamp: +new Date() }
-  lastMoves.push(lastMove)
-
-  // remove lastMove after 2 seconds
-  setTimeout(() => lastMoves.remove(lastMove), 2000)
-}
 
 const handleMove = action((direction) => {
   const speedCoeff = settings.speedLimit.get()
@@ -38,7 +26,6 @@ const handleMove = action((direction) => {
   default: { newLocation = [ userLocation[0] + jitter, userLocation[1] + jitter ] }
   }
 
-  pushLastMoves(newLocation)
   userLocation.replace(newLocation)
 
   // we set `lastMoveDirection` to `null` for react re-render without class `.last`
