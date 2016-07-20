@@ -20,11 +20,11 @@
 ## Requirements
 
 * Xcode installed
-* An iOS device with Pokémon Go connected to your Mac
+* An iOS device with Pokémon Go connected to your Mac via USB
 
 ## How-to run
 
-1. Start Pokémon Go on your iOS device & connect to your Mac
+1. Start Pokémon Go on your iOS device & connect to your Mac via USB
 2. Start the `pokemongo-webspoof` app, it will start also Xcode
 3. Rename the Bundle Indentifer to something unique and different
 4. Build & run Xcode project on your connected iPhone
