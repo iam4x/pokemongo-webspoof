@@ -29,7 +29,7 @@
 3. Rename the Bundle Indentifer to something unique and different
 4. Build & run Xcode project on your connected iPhone
 5. Check the `Auto update Xcode location` in the app when everything is running
-6. Go back to Xcode, click into menu Debug -> Simulate Location -> pokemonLocation
+6. Go back to Xcode, click into menu Debug -> Simulate Location -> pokemonLocation ( see hint at [#5:comment](https://github.com/iam4x/pokemongo-webspoof/issues/5#issuecomment-233739078) )
 7. And voilà, you can move with the arrows key and see your character move
 
 **NOTE:** You can also use your keyboard arrows to move on the map 👍
