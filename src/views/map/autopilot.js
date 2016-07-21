@@ -9,7 +9,7 @@ import cx from 'classnames'
 import autopilot from '../../models/autopilot.js'
 
 const travelModes = [
-  [ 'walking', 6, 'street-view' ],
+  [ 'walking', 9, 'street-view' ],
   [ 'cycling', 18, 'bicycle' ],
   [ 'subway', 50, 'subway' ],
   [ 'teleport', '~', 'star' ]
