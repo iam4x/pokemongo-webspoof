@@ -26,7 +26,7 @@
 
 1. Start Pokémon Go on your iOS device & connect to your Mac via USB
 2. Start the `pokemongo-webspoof` app, it will start also Xcode
-3. Rename the Bundle Indentifer to something unique and different
+3. Rename the Bundle Indentifer to something unique and different (for example `com.[yourgithubname].pokemon-webspoof` - you need it after an update)
 4. Build & run Xcode project on your connected iPhone
 5. Check the `Auto update Xcode location` in the app when everything is running
 6. Go back to Xcode, click into menu Debug -> Simulate Location -> pokemonLocation ( see hint at [#5:comment](https://github.com/iam4x/pokemongo-webspoof/issues/5#issuecomment-233739078) )
@@ -36,12 +36,14 @@
 
 ## How-to Update
 
-1. Remove `pokemongo-webspoof.app` from authorized app to Accessibility
+1. write down your Bundle Indentifer from xcode setting (for example `com.[yourgithubname].pokemon-webspoof` - see above)
+2. Remove `pokemongo-webspoof.app` from authorized app to Accessibility
   * (System Preferences -> Security & Privacy -> Privacy Tab -> Accessibility)
-2. Delete `pokemongo-webspoof.app` from your computer
-3. Download latest release
-4. Add back new `pokemongo-webspoof.app` to authorized app to Accessibility
+3. Delete `pokemongo-webspoof.app` from your computer
+4. Download latest release
+5. Add back new `pokemongo-webspoof.app` to authorized app to Accessibility
   * (System Preferences -> Security & Privacy -> Privacy Tab -> Accessibility)
+6. Rename the Bundle Indentifer to your previous setting (for example `com.[yourgithubname].pokemon-webspoof` - see above)
 
 ## Develop
 
