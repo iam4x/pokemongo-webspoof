@@ -13,11 +13,13 @@
 		46119DE01D397DE2005433C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46119DDE1D397DE2005433C8 /* Main.storyboard */; };
 		46119DE21D397DE2005433C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46119DE11D397DE2005433C8 /* Assets.xcassets */; };
 		46119DE51D397DE2005433C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46119DE31D397DE2005433C8 /* LaunchScreen.storyboard */; };
-		46119DED1D397E7E005433C8 /* pokemonLocation.gpx in Frameworks */ = {isa = PBXBuildFile; fileRef = 46119DEC1D397E7E005433C8 /* pokemonLocation.gpx */; };
+		B5DF680C1D40BFBF00CC9CF3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DF680A1D40BFBF00CC9CF3 /* AudioToolbox.framework */; };
+		B5DF680D1D40BFBF00CC9CF3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DF680B1D40BFBF00CC9CF3 /* AVFoundation.framework */; };
+		B5DF680F1D40C0FF00CC9CF3 /* silent.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B5DF680E1D40C0FF00CC9CF3 /* silent.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		46119DD21D397DE2005433C8 /* pokemon-webspoof.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pokemon-webspoof.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		46119DD21D397DE2005433C8 /* Pokemon WebSpoof.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pokemon WebSpoof.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46119DD61D397DE2005433C8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		46119DD81D397DE2005433C8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		46119DD91D397DE2005433C8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -28,6 +30,9 @@
 		46119DE41D397DE2005433C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		46119DE61D397DE2005433C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46119DEC1D397E7E005433C8 /* pokemonLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text; name = pokemonLocation.gpx; path = ../pokemonLocation.gpx; sourceTree = "<group>"; };
+		B5DF680A1D40BFBF00CC9CF3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		B5DF680B1D40BFBF00CC9CF3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		B5DF680E1D40C0FF00CC9CF3 /* silent.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = silent.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,7 +40,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46119DED1D397E7E005433C8 /* pokemonLocation.gpx in Frameworks */,
+				B5DF680C1D40BFBF00CC9CF3 /* AudioToolbox.framework in Frameworks */,
+				B5DF680D1D40BFBF00CC9CF3 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +53,8 @@
 			children = (
 				46119DEC1D397E7E005433C8 /* pokemonLocation.gpx */,
 				46119DD41D397DE2005433C8 /* pokemon-webspoof */,
+				B5DF680A1D40BFBF00CC9CF3 /* AudioToolbox.framework */,
+				B5DF680B1D40BFBF00CC9CF3 /* AVFoundation.framework */,
 				46119DD31D397DE2005433C8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,7 +62,7 @@
 		46119DD31D397DE2005433C8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				46119DD21D397DE2005433C8 /* pokemon-webspoof.app */,
+				46119DD21D397DE2005433C8 /* Pokemon WebSpoof.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -78,6 +86,7 @@
 		46119DD51D397DE2005433C8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B5DF680E1D40C0FF00CC9CF3 /* silent.mp3 */,
 				46119DD61D397DE2005433C8 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -86,9 +95,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		46119DD11D397DE2005433C8 /* pokemon-webspoof */ = {
+		46119DD11D397DE2005433C8 /* Pokemon WebSpoof */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 46119DE91D397DE2005433C8 /* Build configuration list for PBXNativeTarget "pokemon-webspoof" */;
+			buildConfigurationList = 46119DE91D397DE2005433C8 /* Build configuration list for PBXNativeTarget "Pokemon WebSpoof" */;
 			buildPhases = (
 				46119DCE1D397DE2005433C8 /* Sources */,
 				46119DCF1D397DE2005433C8 /* Frameworks */,
@@ -98,9 +107,9 @@
 			);
 			dependencies = (
 			);
-			name = "pokemon-webspoof";
+			name = "Pokemon WebSpoof";
 			productName = "pokemon-webspoof";
-			productReference = 46119DD21D397DE2005433C8 /* pokemon-webspoof.app */;
+			productReference = 46119DD21D397DE2005433C8 /* Pokemon WebSpoof.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -135,7 +144,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				46119DD11D397DE2005433C8 /* pokemon-webspoof */,
+				46119DD11D397DE2005433C8 /* Pokemon WebSpoof */,
 			);
 		};
 /* End PBXProject section */
@@ -148,6 +157,7 @@
 				46119DE51D397DE2005433C8 /* LaunchScreen.storyboard in Resources */,
 				46119DE21D397DE2005433C8 /* Assets.xcassets in Resources */,
 				46119DE01D397DE2005433C8 /* Main.storyboard in Resources */,
+				B5DF680F1D40C0FF00CC9CF3 /* silent.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +314,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		46119DE91D397DE2005433C8 /* Build configuration list for PBXNativeTarget "pokemon-webspoof" */ = {
+		46119DE91D397DE2005433C8 /* Build configuration list for PBXNativeTarget "Pokemon WebSpoof" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				46119DEA1D397DE2005433C8 /* Debug */,
