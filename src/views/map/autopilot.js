@@ -9,7 +9,8 @@ import cx from 'classnames'
 import autopilot from '../../models/autopilot.js'
 
 const travelModes = [
-  [ 'walk', 12, 'street-view' ],
+  [ 'walking', 9, 'street-view' ],
+  [ 'cycling', 18, 'bicycle' ],
   [ 'subway', 50, 'subway' ],
   [ 'teleport', '~', 'star' ]
 ]
@@ -18,7 +19,7 @@ const travelModes = [
 class Autopilot extends Component {
 
   @observable isModalOpen = false
-  @observable travelMode = 'walk'
+  @observable travelMode = 'walking'
 
   @computed get speed() {
     const [ , speed ] = travelModes.find(([ t ]) => t === this.travelMode)
@@ -101,16 +102,16 @@ class Autopilot extends Component {
 
         <div className={ cx('autopilot-modal', { open: this.isModalOpen }) }>
           <div className='travel-modes row'>
-            { travelModes.map(([ name, speed, icon ]) =>
+            {travelModes.map(([ name, speed, icon ]) =>
               <div
                 key={ name }
-                className={ `col-xs-4 text-center ${name}` }
-                onClick={ this.handleSelectTravelMode(name, speed) }>
+                className={ `col-xs-3 text-center ${name}` }
+                onClick={ this.handleSelectTravelMode(name, speed)}>
                 <div className={ cx('card travel-mode', { selected: name === this.travelMode }) }>
                   <div className='card-block'>
                     <div className={ `fa fa-${icon}` } />
                     <div className='desc'>
-                      <strong>{ capitalize(name) } </strong>
+                      <strong>{ capitalize(name) } </strong><br/>
                       <span>{ speed } { speed !== '~' && 'km/h' }</span>
                     </div>
                   </div>

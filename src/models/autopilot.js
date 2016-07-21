@@ -12,7 +12,7 @@ class Autopilot {
   @observable paused = false
   @observable running = false // is the autopilot running
   @observable steps = []
-  @observable speed = 12 / 3600 // 0.0033 ~= 3,3m/s ~= 12 km/h
+  @observable speed = 9 / 3600 // 0.0033 ~= 3,3m/s ~= 12 km/h
   @observable distance = 0 // remaining distance to arrival in km
   @observable rawOverviewPath = null // save last query to re-calculate optimized route
 
