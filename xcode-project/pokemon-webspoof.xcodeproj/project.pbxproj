@@ -19,7 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		46119DD21D397DE2005433C8 /* pokemon-webspoof.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pokemon-webspoof.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		46119DD21D397DE2005433C8 /* Pokemon WebSpoof.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pokemon WebSpoof.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46119DD61D397DE2005433C8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		46119DD81D397DE2005433C8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		46119DD91D397DE2005433C8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -62,7 +62,7 @@
 		46119DD31D397DE2005433C8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				46119DD21D397DE2005433C8 /* pokemon-webspoof.app */,
+				46119DD21D397DE2005433C8 /* Pokemon WebSpoof.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,9 +95,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		46119DD11D397DE2005433C8 /* pokemon-webspoof */ = {
+		46119DD11D397DE2005433C8 /* Pokemon WebSpoof */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 46119DE91D397DE2005433C8 /* Build configuration list for PBXNativeTarget "pokemon-webspoof" */;
+			buildConfigurationList = 46119DE91D397DE2005433C8 /* Build configuration list for PBXNativeTarget "Pokemon WebSpoof" */;
 			buildPhases = (
 				46119DCE1D397DE2005433C8 /* Sources */,
 				46119DCF1D397DE2005433C8 /* Frameworks */,
@@ -107,9 +107,9 @@
 			);
 			dependencies = (
 			);
-			name = "pokemon-webspoof";
+			name = "Pokemon WebSpoof";
 			productName = "pokemon-webspoof";
-			productReference = 46119DD21D397DE2005433C8 /* pokemon-webspoof.app */;
+			productReference = 46119DD21D397DE2005433C8 /* Pokemon WebSpoof.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -144,7 +144,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				46119DD11D397DE2005433C8 /* pokemon-webspoof */,
+				46119DD11D397DE2005433C8 /* Pokemon WebSpoof */,
 			);
 		};
 /* End PBXProject section */
@@ -314,7 +314,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		46119DE91D397DE2005433C8 /* Build configuration list for PBXNativeTarget "pokemon-webspoof" */ = {
+		46119DE91D397DE2005433C8 /* Build configuration list for PBXNativeTarget "Pokemon WebSpoof" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				46119DEA1D397DE2005433C8 /* Debug */,
