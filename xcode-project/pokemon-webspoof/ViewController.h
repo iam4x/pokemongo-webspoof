@@ -10,6 +10,8 @@
 
 @interface ViewController : UIViewController
 
+- (IBAction)launchPokemonGo:(id)sender;
+- (IBAction)backgroundAppSwitchChanged:(id)sender;
 
 @end
 
