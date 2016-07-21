@@ -87,9 +87,16 @@ class Map extends Component {
             <Pokeball lat={ userLocation[0] } lng={ userLocation[1] } />
           </GoogleMap> :
           <div
-            style={ { position: 'absolute', top: '50%', left: '50%' } }
-            className='alert alert-info'>
-            <i className='fa fa-spin fa-2x fa-refresh' />
+            style={ {
+              position: 'absolute',
+              top: 'calc(50vh - (100px / 2) - 60px)',
+              left: 'calc(50vw - (260px / 2))'
+            } }
+            className='alert alert-info text-center'>
+            <i
+              style={ { marginBottom: 10 } }
+              className='fa fa-spin fa-2x fa-refresh' />
+            <div>Loading user location & map...</div>
           </div> }
 
         <div className='btn btn-drag-map'>
