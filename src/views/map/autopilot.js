@@ -10,7 +10,7 @@ import autopilot from '../../models/autopilot.js'
 
 const travelModes = [
   [ 'walking', 6, 'street-view' ],
-  [ 'cycling', 12, 'bicycle' ],
+  [ 'cycling', 18, 'bicycle' ],
   [ 'subway', 50, 'subway' ],
   [ 'teleport', '~', 'star' ]
 ]
