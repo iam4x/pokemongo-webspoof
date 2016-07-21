@@ -10,27 +10,26 @@
 #import "AVFoundation/AVFoundation.h"
 #import "AudioToolbox/AudioToolbox.h"
 
+static NSString * const kURLScheme = @"b335b2fc-69dc-472c-9e88-e6c97f84091c-3://";
 
-@interface ViewController () <AVAudioPlayerDelegate> {
-    
-    AVAudioPlayer *backgroundAudioPlayer; //Plays silent audio in the background to keep
-}
+@interface ViewController () <AVAudioPlayerDelegate>
 
+@property (nonatomic, strong)  AVAudioPlayer *backgroundAudioPlayer; //Plays silent audio in the background to keep
+- (IBAction)launchPokemonGo:(id)sender;
+- (IBAction)backgroundAppSwitchChanged:(id)sender;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"silent" ofType:@"mp3"]];
-    backgroundAudioPlayer=[backgroundAudioPlayer initWithContentsOfURL:url error:nil];
-    backgroundAudioPlayer.numberOfLoops=-1;
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:nil]; //Allows the silent audio to play along side iTunes
-    [[AVAudioSession sharedInstance] setActive:YES error:nil];
-    
-    [backgroundAudioPlayer play];
-    
+    NSError* catError = nil;
+    NSError* activeError = nil;
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:&catError]; //Allows the silent audio to play along side iTunes
+    [[AVAudioSession sharedInstance] setActive:YES error:&activeError];
+    if (!activeError && !catError) {
+        [self setupAndPlay];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,21 +37,33 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Sound Stuff
+
+-(void)setupAndPlay {
+    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"silent" ofType:@"mp3"]];
+    self.backgroundAudioPlayer=[[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+    self.backgroundAudioPlayer.numberOfLoops=-1;
+
+    
+    [self.backgroundAudioPlayer play];
+}
+#pragma mark - Actions
+
 - (IBAction)launchPokemonGo:(id)sender {
     
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"b335b2fc-69dc-472c-9e88-e6c97f84091c-3://"]]) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"b335b2fc-69dc-472c-9e88-e6c97f84091c-3://"]];
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:kURLScheme]]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kURLScheme]];
     }
-    
 }
 
 - (IBAction)backgroundAppSwitchChanged:(id)sender {
     
     if ([(UISwitch*)sender isOn]) {
-        [backgroundAudioPlayer play];
+        [self setupAndPlay];
     }
     else{
-        [backgroundAudioPlayer stop];
+        [self.backgroundAudioPlayer stop];
+        self.backgroundAudioPlayer = nil;
     }
 }
 @end
