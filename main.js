@@ -42,5 +42,9 @@ app.on('ready', () => {
   })
 })
 
-app.on('window-all-closed', () => (process.platform !== 'darnwin') && app.quit())
+app.on('window-all-closed', () => {
+  scriptPath = resolve(__dirname, 'quit.applescript');
+  execSync(`osascript  ${scriptPath}`);
+  app.quit();
+})
 app.on('activate', () => (win === null) && createWindow())
