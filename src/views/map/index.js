@@ -18,6 +18,8 @@ import TotalDistance from './total-distance.js'
 import Autopilot from './autopilot.js'
 import Pokeball from './pokeball.js'
 
+import autopilot from '../../models/autopilot.js'
+
 @observer
 class Map extends Component {
 
@@ -25,7 +27,7 @@ class Map extends Component {
 
   @observable mapOptions = {
     keyboardShortcuts: false,
-    draggable: false
+    draggable: true
   }
 
   componentWillMount() {
@@ -59,15 +61,22 @@ class Map extends Component {
       `)
     }
   }
-
+    
   @action handleGeolocationSuccess({ coords: { latitude, longitude } }) {
     userLocation.replace([ latitude, longitude ])
   }
 
   @action toggleMapDrag = () => {
     this.mapOptions.draggable = !this.mapOptions.draggable
-    this.map.setOptions(toJS(this.mapOptions))
+    this.map.map_.setOptions(toJS(this.mapOptions))
+
   }
+
+    @action handleClick = ({x, y, lat, lng, event}) => {
+        if(!this.mapOptions.draggable){
+            this.autopilot.handleSuggestionChange({ suggestion: { latlng: { lat, lng } } })
+        }
+    }
 
   render() {
     const [ latitude, longitude ] = userLocation
@@ -77,10 +86,10 @@ class Map extends Component {
         { /* only display google map when user geolocated */ }
         { (latitude && longitude) ?
           <GoogleMap
-            ref='map'
+            ref={(ref) => this.map = ref}
             zoom={ settings.zoom.get() }
             center={ [ latitude, longitude ] }
-            onChange={ this.handleDragMap }
+            onClick={ this.handleClick }
             options={ () => this.mapOptions }
             onGoogleApiLoaded={ this.handleGoogleMapLoaded }
             yesIWantToUseGoogleMapApiInternals={ true }>
@@ -120,7 +129,7 @@ class Map extends Component {
         <BooleanSettings />
         <Controls />
         <TotalDistance />
-        <Autopilot />
+        <Autopilot ref={(ref) => this.autopilot = ref} />
       </div>
     )
   }
