@@ -1,4 +1,3 @@
-@@ -0,0 +1,60 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 import moment from 'moment'
