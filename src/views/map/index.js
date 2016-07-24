@@ -8,6 +8,7 @@ import Alert from 'react-s-alert'
 
 import userLocation from '../../models/user-location.js'
 import settings from '../../models/settings.js'
+import autopilot from '../../models/autopilot.js'
 
 import SpeedCounter from './speed-counter.js'
 import BooleanSettings from './boolean-settings.js'
@@ -22,6 +23,7 @@ import Pokeball from './pokeball.js'
 class Map extends Component {
 
   map = null
+  autopilot = null
 
   @observable mapOptions = {
     keyboardShortcuts: false,
@@ -64,6 +66,11 @@ class Map extends Component {
     userLocation.replace([ latitude, longitude ])
   }
 
+  @action handleClickMap = ({ lat, lng }) => {
+    autopilot.scheduleTrip(lat, lng)
+      .then(() => { if (!this.refs.autopilot.isModalOpen) this.refs.autopilot.isModalOpen = true })
+  }
+
   @action toggleMapDrag = () => {
     this.mapOptions.draggable = !this.mapOptions.draggable
     this.map.setOptions(toJS(this.mapOptions))
@@ -80,6 +87,7 @@ class Map extends Component {
             ref='map'
             zoom={ settings.zoom.get() }
             center={ [ latitude, longitude ] }
+            onClick={ this.handleClickMap }
             onChange={ this.handleDragMap }
             options={ () => this.mapOptions }
             onGoogleApiLoaded={ this.handleGoogleMapLoaded }
@@ -120,7 +128,7 @@ class Map extends Component {
         <BooleanSettings />
         <Controls />
         <TotalDistance />
-        <Autopilot />
+        <Autopilot ref="autopilot" />
       </div>
     )
   }
