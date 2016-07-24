@@ -22,6 +22,7 @@
     "cheerio": "^0.20.0",
     "geocoder": "^0.2.2",
     "google-map-react": "^0.16.0",
+    "moment": "^2.14.1",
     "tmp": "0.0.28"
   },
   "devDependencies": {

@@ -5,6 +5,7 @@ import Alert from 'react-s-alert'
 
 import settings from './settings.js'
 import stats from './stats.js'
+import pokemonSpawns from './pokemon-location.js'
 
 // electron specific import
 const { writeFile } = window.require('fs')
@@ -40,6 +41,9 @@ const updateXcodeLocation = throttle(([ lat, lng ]) => {
   // track location changes for total distance & average speed
   stats.pushMove(lat, lng)
 
+  pokemonSpawns.checkPokemonSpawns(lat, lng)
+  pokemonSpawns.scanPokemonSpawns(lat, lng)
+  
   const xcodeLocationData =
     `<gpx creator="Xcode" version="1.1"><wpt lat="${lat.toFixed(6)}" lon="${lng.toFixed(6)}"><name>PokemonLocation</name></wpt></gpx>`
 
