@@ -59,7 +59,7 @@ class Pokemon extends Component {
           alt={ `pokemon ${pokemonId}` }
           src={ `https://ugc.pokevision.com/images/pokemon/${pokemonId}.png` } />
         <div className='time-left'>
-          <div><strong>{ pokemons[pokemonId + 1] }</strong></div>
+          <div><strong>{ pokemons[pokemonId - 1] }</strong></div>
           <div>{ this.timeLeft }</div>
         </div>
       </div>

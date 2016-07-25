@@ -5,15 +5,20 @@
 
   img {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -24px;
+    left: -24px;
   }
 
   .time-left {
-    border-radius: 3px;
     background-color: rgba(0, 0, 0, .5);
+    border-radius: 3px;
     color: #fff;
     padding: 5px;
+    position: absolute;
     font-size: 11px;
+    text-align: center;
+    top: -24px;
+    left: 24px;
+    white-space: nowrap;
   }
 }
