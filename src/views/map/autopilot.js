@@ -57,6 +57,12 @@ class Autopilot extends Component {
     this.isModalOpen = false
   }
 
+  @action handleCancelAutopilot = () => {
+    // reset modal state
+    this.placesAutocomplete.setVal(null)
+    this.isModalOpen = false
+  }
+
   @action handleSelectTravelMode = (name, speed) => () => {
     autopilot.speed = speed / 3600
     this.travelMode = name
@@ -150,14 +156,24 @@ class Autopilot extends Component {
             </div> :
             <noscript /> }
 
-          <div className='text-center'>
-            <button
-              type='button'
-              className='btn btn-block btn-sm btn-success'
-              disabled={ autopilot.accurateSteps.length === 0 }
-              onClick={ this.handleStartAutopilot }>
-              Start autopilot!
-            </button>
+          <div className='text-center row'>
+            <div className='col-xs-2'>
+              <button
+                type='button'
+                className='btn btn-block btn-sm btn-danger'
+                onClick={ this.handleCancelAutopilot }>
+                Cancel
+              </button>
+            </div>
+            <div className='col-xs-10'>
+              <button
+                type='button'
+                className='btn btn-block btn-sm btn-success'
+                disabled={ autopilot.accurateSteps.length === 0 }
+                onClick={ this.handleStartAutopilot }>
+                Start autopilot!
+              </button>
+            </div>
           </div>
         </div>
       </div>

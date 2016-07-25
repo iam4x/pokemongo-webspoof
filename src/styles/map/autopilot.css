@@ -23,7 +23,7 @@
     display: none;
     position: absolute;
     padding: 10px;
-    top: calc(50vh - (300px / 2) - $navbar-height);
+    top: calc(50vh - (420px / 2) - $navbar-height);
     left: calc(50vw - (600px / 2));
     width: 600px;
     z-index: 9999;

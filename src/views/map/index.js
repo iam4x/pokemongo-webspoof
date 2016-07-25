@@ -27,7 +27,7 @@ class Map extends Component {
 
   @observable mapOptions = {
     keyboardShortcuts: false,
-    draggable: false
+    draggable: true
   }
 
   componentWillMount() {
@@ -68,8 +68,14 @@ class Map extends Component {
 
   @action toggleMapDrag = () => {
     this.mapOptions.draggable = !this.mapOptions.draggable
-    this.map.setOptions(toJS(this.mapOptions))
+    this.map.map_.setOptions(toJS(this.mapOptions))
   }
+
+    @action handleClick = ({ lat, lng }) => {
+      if (!this.mapOptions.draggable) {
+        this.autopilot.handleSuggestionChange({ suggestion: { latlng: { lat, lng } } })
+      }
+    }
 
   render() {
     const [ latitude, longitude ] = userLocation
@@ -79,10 +85,10 @@ class Map extends Component {
         { /* only display google map when user geolocated */ }
         { (latitude && longitude) ?
           <GoogleMap
-            ref='map'
+            ref={ (ref) => { this.map = ref } }
             zoom={ settings.zoom.get() }
             center={ [ latitude, longitude ] }
-            onChange={ this.handleDragMap }
+            onClick={ this.handleClick }
             options={ () => this.mapOptions }
             onGoogleApiLoaded={ this.handleGoogleMapLoaded }
             yesIWantToUseGoogleMapApiInternals={ true }>
@@ -123,7 +129,7 @@ class Map extends Component {
         <BooleanSettings />
         <Controls />
         <TotalDistance />
-        <Autopilot />
+        <Autopilot ref={ (ref) => { this.autopilot = ref } } />
       </div>
     )
   }
