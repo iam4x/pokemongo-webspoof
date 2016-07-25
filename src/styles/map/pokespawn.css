@@ -1,0 +1,17 @@
+.pokespawn .pokemon{
+  margin-top: -10px;
+  margin-left: -10px;
+  height: 32px;
+  width: 32px;
+}
+
+.pokespawn .info {
+	display: block;
+	width: 32px;
+  background-color:rgba(255,255,255,0.5);
+  border: 1px solid rgba(0,0,0,0.3);
+  text-align: center;
+}
+.pokespawn .info .endoflife, .pokespawn .info .name {
+	display: block;
+}

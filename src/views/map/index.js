@@ -8,6 +8,7 @@ import Alert from 'react-s-alert'
 
 import userLocation from '../../models/user-location.js'
 import settings from '../../models/settings.js'
+import pokemonSpawns from '../../models/pokemon-location.js'
 
 import SpeedCounter from './speed-counter.js'
 import BooleanSettings from './boolean-settings.js'
@@ -17,6 +18,7 @@ import Controls from './controls.js'
 import TotalDistance from './total-distance.js'
 import Autopilot from './autopilot.js'
 import Pokeball from './pokeball.js'
+import PokemonSpawn from './pokespawn.js'
 
 @observer
 class Map extends Component {
@@ -91,6 +93,7 @@ class Map extends Component {
             onGoogleApiLoaded={ this.handleGoogleMapLoaded }
             yesIWantToUseGoogleMapApiInternals={ true }>
             <Pokeball lat={ userLocation[0] } lng={ userLocation[1] } />
+            { pokemonSpawns.spawns.map(spawn => { return (<PokemonSpawn lat={ spawn.latitude } lng={ spawn.longitude } key={spawn.id} spawn={spawn} />) }) }
           </GoogleMap> :
           <div
             style={ {
