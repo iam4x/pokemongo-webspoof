@@ -15,7 +15,8 @@ export default {
   module: {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel' },
-      { test: /\.css$/, loader: 'style!css!postcss' }
+      { test: /\.css$/, loader: 'style!css!postcss' },
+      { test: /\.json$/, loader: 'json' }
     ]
   },
 
