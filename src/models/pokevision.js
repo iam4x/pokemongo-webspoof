@@ -35,7 +35,7 @@ class Pokevision {
       Alert.warning(`
         <strong>Could not get Pokémons spots</strong>
         <div class="stack">${error}</div>
-      `)
+      `, { timeout: 2000 })
 
       this.status = 'offline'
     }
