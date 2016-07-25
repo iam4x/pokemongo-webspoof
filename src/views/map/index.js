@@ -69,11 +69,11 @@ class Map extends Component {
     this.map.map_.setOptions(toJS(this.mapOptions))
   }
 
-    @action handleClick = ({ lat, lng }) => {
-      if (!this.mapOptions.draggable) {
-        this.autopilot.handleSuggestionChange({ suggestion: { latlng: { lat, lng } } })
-      }
+  @action handleClick = ({ lat, lng }) => {
+    if (!this.mapOptions.draggable) {
+      this.autopilot.handleSuggestionChange({ suggestion: { latlng: { lat, lng } } })
     }
+  }
 
   render() {
     const [ latitude, longitude ] = userLocation
