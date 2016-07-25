@@ -93,7 +93,7 @@ class Map extends Component {
             onGoogleApiLoaded={ this.handleGoogleMapLoaded }
             yesIWantToUseGoogleMapApiInternals={ true }>
             <Pokeball lat={ userLocation[0] } lng={ userLocation[1] } />
-            { pokemonSpawns.spawns.values().map((spawn, idx) => { return (<PokemonSpawn lat={ spawn.latitude } lng={ spawn.longitude } key={idx} spawn={spawn} />) }) }
+            { pokemonSpawns.spawns.map(spawn => { return (<PokemonSpawn lat={ spawn.latitude } lng={ spawn.longitude } key={spawn.id} spawn={spawn} />) }) }
           </GoogleMap> :
           <div
             style={ {

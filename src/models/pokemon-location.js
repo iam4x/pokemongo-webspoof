@@ -5,7 +5,7 @@ import moment from 'moment'
 
 const serverStatus = observable([ 'unknown', 'default' ])
 const isLoading = observable(false)
-const spawns = asMap({})
+const spawns = observable([])
 var counter = 0
 
 const STATUSES = [
@@ -22,15 +22,8 @@ const checkPokemonSpawns = throttle(async (latitude, longitude) => {
   try {
     const {data, status} = await axios.get(url);
     if (status == 200 && data.status === "success") {
-      if (counter > 5) {
-        counter = 0;
-        spawns.clear();
-      }
-
-      data.pokemon.map(p => {
-        spawns.set(p.id, p)
-      })
-
+      spawns.replace(data.pokemon);
+      
       serverStatus.replace(STATUSES[0])    
     } else {
       spawns.clear()
