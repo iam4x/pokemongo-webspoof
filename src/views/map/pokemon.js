@@ -5,6 +5,7 @@ import { observable } from 'mobx'
 import { observer } from 'mobx-react'
 
 import pokevision from '../../models/pokevision.js'
+import { pokemons } from '../../pokemons.json'
 
 @observer
 class Pokemon extends Component {
@@ -57,7 +58,10 @@ class Pokemon extends Component {
         <img
           alt={ `pokemon ${pokemonId}` }
           src={ `https://ugc.pokevision.com/images/pokemon/${pokemonId}.png` } />
-        <span className='time-left'>{ this.timeLeft }</span>
+        <div className='time-left'>
+          <div><strong>{ pokemons[pokemonId + 1] }</strong></div>
+          <div>{ this.timeLeft }</div>
+        </div>
       </div>
     )
   }
