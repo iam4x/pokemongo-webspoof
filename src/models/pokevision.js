@@ -21,8 +21,14 @@ class Pokevision {
 
     try {
       const url = `https://pokevision.com/map/data/${latitude}/${longitude}`
-      const { data: { pokemon } } = await axios({ url })
+      const { headers, ...resp } = await axios({ url })
 
+      // check that we receive json content or it might mean that pokévision API is down
+      const isJSON = headers['content-type'].toLowerCase().includes('json')
+      if (!isJSON) throw new Error('Could not parse pokévision response')
+
+      // replace pokémon spots by new one :+1:
+      const { data: { pokemon } } = resp
       this.status = 'online'
       this.pokemonSpots.replace(pokemon)
     } catch (error) {
