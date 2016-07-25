@@ -5,7 +5,6 @@ import { action, observable, computed } from 'mobx'
 import { observer } from 'mobx-react'
 import places from 'places.js'
 import cx from 'classnames'
-import Alert from 'react-s-alert'
 
 import autopilot from '../../models/autopilot.js'
 
@@ -168,9 +167,9 @@ class Autopilot extends Component {
           </div>
           <div className='text-center'>
             <button
-                type='button'
-                className='btn btn-block btn-sm btn-danger'
-                onClick={ this.handleCancelAutopilot }>
+              type='button'
+              className='btn btn-block btn-sm btn-danger'
+              onClick={ this.handleCancelAutopilot }>
               Cancel
             </button>
           </div>
