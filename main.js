@@ -42,5 +42,5 @@ app.on('ready', () => {
   })
 })
 
-app.on('window-all-closed', () => (process.platform !== 'darnwin') && app.quit())
+app.on('window-all-closed', () => (process.platform !== 'darwin') && app.quit())
 app.on('activate', () => (win === null) && createWindow())
