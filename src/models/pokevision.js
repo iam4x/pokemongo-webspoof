@@ -7,6 +7,9 @@ import userLocation from './user-location.js'
 
 class Pokevision {
 
+  // reference to `updatePokemonSpotsLoop` setTimeout
+  timeout = null
+
   @observable pokemonSpots = []
   @observable status = 'unknown'
 
@@ -50,7 +53,14 @@ class Pokevision {
   @action updatePokemonSpotsLoop = () => {
     const updatedSpots = this.calcTimeLeft(toJS(this.pokemonSpots))
     this.pokemonSpots.replace(updatedSpots)
-    setTimeout(() => this.updatePokemonSpotsLoop(), 500)
+
+    // clear old timeout
+    if (this.timeout) {
+      clearTimeout(this.timeout)
+      this.timeout = null
+    }
+
+    this.timemout = setTimeout(this.updatePokemonSpotsLoop, 500)
   }
 
   // calc human readable `timeLeft` from `expiration_time`
