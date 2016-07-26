@@ -93,14 +93,12 @@ class Map extends Component {
             onGoogleApiLoaded={ this.handleGoogleMapLoaded }
             yesIWantToUseGoogleMapApiInternals={ true }>
             { /* display pokémon spots from pokévision */ }
-            { pokevision.pokemonSpots.map((p, idx) =>
+            { pokevision.pokemonSpots.map(pokemon =>
               <Pokemon
-                key={ idx }
-                id={ p.id }
-                pokemonId={ p.pokemonId }
-                lat={ p.latitude }
-                lng={ p.longitude }
-                expires={ p.expiration_time } />) }
+                key={ pokemon.id }
+                pokemon={ pokemon }
+                lat={ pokemon.latitude }
+                lng={ pokemon.longitude } />) }
 
             { /* userlocation center */ }
             <Pokeball lat={ userLocation[0] } lng={ userLocation[1] } />
