@@ -40,7 +40,7 @@ class Autopilot extends Component {
     this.placesAutocomplete.on('change', this.handleSuggestionChange)
 
     window.addEventListener('keyup', ({ keyCode }) => {
-      if (keyCode === 27) {
+      if (keyCode === 27 && this.isModalOpen) {
         this.handleCancelAutopilot()
       }
     })
