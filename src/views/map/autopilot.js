@@ -33,6 +33,11 @@ class Autopilot extends Component {
     return travelModeName
   }
 
+  @computed get travelModeIcon() {
+    const [ , , travelModeIcon ] = travelModes.find(([ t ]) => t === this.travelMode)
+    return travelModeIcon
+  }
+
   componentDidMount() {
     // initialize algolia places input
     const { placesEl } = this.refs
@@ -109,7 +114,7 @@ class Autopilot extends Component {
           <div
             className='edit btn btn-primary'
             onClick={ this.handleChangeSpeed }>
-            <i className={ 'fa fa-pencil' } />
+            <i className={ `fa fa-${this.travelModeIcon}` } />
           </div>
         }
 
@@ -187,7 +192,7 @@ class Autopilot extends Component {
                 className='btn btn-block btn-sm btn-success'
                 disabled={ autopilot.accurateSteps.length === 0 }
                 onClick={ this.handleStartAutopilot }>
-                Start autopilot!
+                { !autopilot.clean ? 'Update' : 'Start' } autopilot!
               </button>
             </div>
           </div>
