@@ -68,6 +68,14 @@ class Autopilot extends Component {
     this.travelMode = name
   }
 
+  @action handleChangeSpeed = () => {
+    const { destination: { lat, lng } } = autopilot
+
+    autopilot.pause()
+    autopilot.scheduleTrip(lat, lng)
+      .then(() => { if (!this.isModalOpen) this.isModalOpen = true })
+  }
+
   renderTogglePause() {
     if (autopilot.running && !autopilot.paused) {
       return (
@@ -96,6 +104,14 @@ class Autopilot extends Component {
     return (
       <div className='autopilot'>
         { this.renderTogglePause() }
+
+        { !autopilot.clean &&
+          <div
+            className='edit btn btn-primary'
+            onClick={ this.handleChangeSpeed }>
+            <i className={ 'fa fa-pencil' } />
+          </div>
+        }
 
         <div className={ cx('algolia-places', { hide: !autopilot.clean }) }>
           <input ref='placesEl' type='search' placeholder='Destination' />
