@@ -10,7 +10,7 @@
 #import "AVFoundation/AVFoundation.h"
 #import "AudioToolbox/AudioToolbox.h"
 
-static NSString * const kURLScheme = @"b335b2fc-69dc-472c-9e88-e6c97f84091c-3://";
+static NSString * const kURLScheme = @"com.googleusercontent.apps.848232511240-dmrj3gba506c9svge2p9gq35p1fg654p://";
 
 @interface ViewController () <AVAudioPlayerDelegate>
 
