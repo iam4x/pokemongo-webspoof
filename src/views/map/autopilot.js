@@ -43,6 +43,12 @@ class Autopilot extends Component {
     const { placesEl } = this.refs
     this.placesAutocomplete = places({ container: placesEl })
     this.placesAutocomplete.on('change', this.handleSuggestionChange)
+
+    window.addEventListener('keyup', ({ keyCode }) => {
+      if (keyCode === 27 && this.isModalOpen) {
+        this.handleCancelAutopilot()
+      }
+    })
   }
 
   @action handleSuggestionChange = ({ suggestion: { latlng: { lat, lng } } }) =>
