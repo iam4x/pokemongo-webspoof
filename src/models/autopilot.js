@@ -15,6 +15,7 @@ class Autopilot {
   @observable speed = 9 / 3600 // 0.0025 ~= 2,5m/s ~= 9 km/h
   @observable distance = 0 // remaining distance to arrival in km
   @observable rawOverviewPath = null // save last query to re-calculate optimized route
+  @observable destination = { lat: null, lng: null };
 
   @computed get accurateSteps() {
     if (this.rawOverviewPath) {
@@ -47,12 +48,13 @@ class Autopilot {
 
   findDirectionPath = (lat, lng) => new Promise((resolve, reject) => {
     const { google: { maps } } = window
+    this.destination = { lat, lng }
 
     // prepare `directionsRequest` to google map
     const directionsService = new maps.DirectionsService()
     const directionsRequest = {
       origin: { lat: userLocation[0], lng: userLocation[1] },
-      destination: { lat, lng },
+      destination: this.destination,
       travelMode: maps.TravelMode.WALKING,
       unitSystem: maps.UnitSystem.METRIC
     }
