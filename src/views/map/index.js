@@ -8,6 +8,7 @@ import Alert from 'react-s-alert'
 
 import userLocation from '../../models/user-location.js'
 import settings from '../../models/settings.js'
+import pokevision from '../../models/pokevision.js'
 
 import SpeedCounter from './speed-counter.js'
 import BooleanSettings from './boolean-settings.js'
@@ -17,6 +18,7 @@ import Controls from './controls.js'
 import TotalDistance from './total-distance.js'
 import Autopilot from './autopilot.js'
 import Pokeball from './pokeball.js'
+import Pokemon from './pokemon.js'
 
 @observer
 class Map extends Component {
@@ -69,11 +71,11 @@ class Map extends Component {
     this.map.map_.setOptions(toJS(this.mapOptions))
   }
 
-    @action handleClick = ({ lat, lng }) => {
-      if (!this.mapOptions.draggable) {
-        this.autopilot.handleSuggestionChange({ suggestion: { latlng: { lat, lng } } })
-      }
+  @action handleClick = ({ lat, lng }) => {
+    if (!this.mapOptions.draggable) {
+      this.autopilot.handleSuggestionChange({ suggestion: { latlng: { lat, lng } } })
     }
+  }
 
   render() {
     const [ latitude, longitude ] = userLocation
@@ -90,6 +92,17 @@ class Map extends Component {
             options={ () => this.mapOptions }
             onGoogleApiLoaded={ this.handleGoogleMapLoaded }
             yesIWantToUseGoogleMapApiInternals={ true }>
+            { /* display pokémon spots from pokévision */ }
+            { pokevision.pokemonSpots.map((p, idx) =>
+              <Pokemon
+                key={ idx }
+                id={ p.id }
+                pokemonId={ p.pokemonId }
+                lat={ p.latitude }
+                lng={ p.longitude }
+                expires={ p.expiration_time } />) }
+
+            { /* userlocation center */ }
             <Pokeball lat={ userLocation[0] } lng={ userLocation[1] } />
           </GoogleMap> :
           <div
