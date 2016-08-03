@@ -48,6 +48,14 @@ class Autopilot extends Component {
       if (keyCode === 27 && this.isModalOpen) {
         this.handleCancelAutopilot()
       }
+      // use the space bar to pause/start autopilot
+      if (keyCode == 32) {
+        if (autopilot.running && !autopilot.paused) {
+          autopilot.pause()
+        } else if (autopilot.paused) {
+          autopilot.start()
+        }
+      }
     })
   }
 
