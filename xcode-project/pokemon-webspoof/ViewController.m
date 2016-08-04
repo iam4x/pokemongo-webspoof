@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "AVFoundation/AVFoundation.h"
 #import "AudioToolbox/AudioToolbox.h"
+#import "LMAppController.h"
 
 static NSString * const kURLScheme = @"com.googleusercontent.apps.848232511240-dmrj3gba506c9svge2p9gq35p1fg654p://";
 
@@ -49,12 +50,7 @@ static NSString * const kURLScheme = @"com.googleusercontent.apps.848232511240-d
 }
 #pragma mark - Actions
 
-- (IBAction)launchPokemonGo:(id)sender {
-    
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:kURLScheme]]) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kURLScheme]];
-    }
-}
+- (IBAction)launchPokemonGo:(id)sender { [[LMAppController sharedInstance] openAppWithBundleIdentifier:@"com.nianticlabs.pokemongo"]; } 
 
 - (IBAction)backgroundAppSwitchChanged:(id)sender {
     
