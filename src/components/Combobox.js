@@ -1,68 +1,75 @@
-import React from 'react';
+import React from 'react'
 
-import { Dropdown } from 'react-bootstrap';
-import { FormControl } from 'react-bootstrap';
-
-
-// Dumb passthrough component to return children. Need this to stop react from complaining
-// TODO: find a way to get rid of this
-class ComboboxToggle extends React.Component {
-	render() {
-		return this.props.children;
-	}
-}
+import { Dropdown, FormControl } from 'react-bootstrap'
+import { Passthrough } from './Passthrough.js'
 
 
 export class Combobox extends React.Component {
-	constructor(props, context) {
-		super(props, context);
+  propTypes = {
+    id: React.PropTypes.string,
+    children: React.PropTypes.any,
+    onChange: React.PropTypes.func
+  }
 
-		this.onChange = (e) => {
-			this.setValue(e.target.value);
+  constructor(props, context) {
+    super(props, context)
 
-			if (this.props.onChange) {
-				this.props.onChange(e);
-			}
-		};
+    this.onChange = (e) => {
+      this.setValue(e.target.value)
 
-		this.onToggle = (e) => {
-			// Need this to stop react from complaining
-			// TODO: find a way to get rid of this
-		};
+      if (this.props.onChange) {
+        this.props.onChange(e)
+      }
+    }
 
-		this.setValue = (value, menuState) => {
-			menuState = (menuState === undefined) ? value !== '' : menuState;
-			this.setState({ value: value, open: menuState });
-		};
+    this.onToggle = () => {
+      // Need this to stop react from complaining
+      // TODO: find a way to get rid of this
+    }
 
-		this.toggleMenu = (openState) => {
-			openState = (openState === undefined) ? !this.state.open : openState;
-			this.setState({ open: openState });
-		};
+    this.setValue = (value, menuState) => {
+      menuState = (menuState === undefined) ? value !== '' : menuState
+      this.setState({ value, open: menuState })
+    }
 
-		this.state = { value: '', open: false };
-	}
+    this.toggleMenu = (openState) => {
+      openState = (openState === undefined) ? !this.state.open : openState
+      this.setState({ open: openState })
+    }
 
-	render() {
-		const { id, children } = this.props;
-		const { value, open } = this.state;
+    this.state = { value: '', open: false }
+  }
 
-		return (
-			<Dropdown className="combobox" id={ id } open={ open } onToggle={ this.onToggle }>
-				<ComboboxToggle bsRole="toggle">
-					<FormControl type="text" placeholder="Bookmarks" onChange={ this.onChange } value={ value } />
-				</ComboboxToggle>
+  render() {
+    const { id, children } = this.props
+    const { value, open } = this.state
 
-				<Dropdown.Menu>
-				{React.Children.toArray(children).filter(child => (
-					!value.trim() ||
-					(child.props.value && child.props.value.toLowerCase().indexOf(value.toLowerCase()) !== -1) ||
-					(child.props.children.toLowerCase && child.props.children.toLowerCase().indexOf(value.toLowerCase()) !== -1)
-				))}
-				</Dropdown.Menu>
-			</Dropdown>
-		);
-	}
+    return (
+      <Dropdown className='combobox' id={ id } open={ open } onToggle={ this.onToggle }>
+        <Passthrough bsRole='toggle'>
+          <FormControl
+            type='text'
+            placeholder='Bookmarks'
+            onChange={ this.onChange }
+            value={ value } />
+        </Passthrough>
+
+        <Dropdown.Menu>
+        { React.Children.toArray(children).filter(child => (
+          !value.trim() ||
+          (
+            child.props.value &&
+            child.props.value.toLowerCase().indexOf(value.toLowerCase()) !== -1
+          ) ||
+          (
+            child.props.children.toLowerCase &&
+            child.props.children.toLowerCase().indexOf(value.toLowerCase()) !== -1
+          )
+        )) }
+        </Dropdown.Menu>
+      </Dropdown>
+    )
+  }
 }
 
-export default Combobox;
+export default Combobox
