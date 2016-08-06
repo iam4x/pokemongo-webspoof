@@ -1,5 +1,5 @@
 /* eslint max-len: 0 */
-import { throttle } from 'lodash'
+import { random, throttle } from 'lodash'
 import { observable } from 'mobx'
 import Alert from 'react-s-alert'
 
@@ -40,8 +40,10 @@ const updateXcodeLocation = throttle(([ lat, lng ]) => {
   // track location changes for total distance & average speed
   stats.pushMove(lat, lng)
 
+  const jitter = settings.addJitterToMoves.get() ? random(-0.000009, 0.000009, true) : 0
+
   const xcodeLocationData =
-    `<gpx creator="Xcode" version="1.1"><wpt lat="${lat.toFixed(6)}" lon="${lng.toFixed(6)}"><name>PokemonLocation</name></wpt></gpx>`
+    `<gpx creator="Xcode" version="1.1"><wpt lat="${(lat + jitter).toFixed(6)}" lon="${(lng + jitter).toFixed(6)}"><name>PokemonLocation</name></wpt></gpx>`
 
   // write `pokemonLocation.gpx` file fro xcode spoof location
   const filePath = resolve(remote.getGlobal('tmpProjectPath'), 'pokemonLocation.gpx')
@@ -77,5 +79,14 @@ userLocation.intercept(validateCoordinates)
 
 // after update
 userLocation.observe(() => updateXcodeLocation(userLocation))
+
+// periodically to prevent reversions
+window.setInterval(() => {
+  if (!settings.stationaryUpdates.get()) {
+    return
+  }
+
+  updateXcodeLocation(userLocation)
+}, 10000)
 
 export default userLocation

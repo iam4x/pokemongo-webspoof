@@ -15,15 +15,13 @@ const handleMove = action((direction) => {
     random(0.0000300, 0.000070, true) / speedCoeff :
     random(0.0000700, 0.000070, true) / speedCoeff
 
-  const jitter = settings.addJitterToMoves.get() ? random(-0.000009, 0.000009, true) : 0
-
   let newLocation
   switch (direction) {
-  case 'LEFT': { newLocation = [ userLocation[0] + jitter, userLocation[1] - move ]; break }
-  case 'RIGHT': { newLocation = [ userLocation[0] + jitter, userLocation[1] + move ]; break }
-  case 'DOWN': { newLocation = [ userLocation[0] - move, userLocation[1] + jitter ]; break }
-  case 'UP': { newLocation = [ userLocation[0] + move, userLocation[1] + jitter ]; break }
-  default: { newLocation = [ userLocation[0] + jitter, userLocation[1] + jitter ] }
+  case 'LEFT': { newLocation = [ userLocation[0], userLocation[1] - move ]; break }
+  case 'RIGHT': { newLocation = [ userLocation[0], userLocation[1] + move ]; break }
+  case 'DOWN': { newLocation = [ userLocation[0] - move, userLocation[1] ]; break }
+  case 'UP': { newLocation = [ userLocation[0] + move, userLocation[1] ]; break }
+  default: { newLocation = [ userLocation[0], userLocation[1] ] }
   }
 
   userLocation.replace(newLocation)
