@@ -5,7 +5,7 @@ import React from 'react'
 // Use this to stop react from complaining about undefined
 // properties on vanilla DOM elements e.g. div
 export class Passthrough extends React.Component {
-  propTypes = {
+  static propTypes = {
     children: React.PropTypes.any
   }
 

@@ -5,7 +5,7 @@ import { Passthrough } from './Passthrough.js'
 
 
 export class Combobox extends React.Component {
-  propTypes = {
+  static propTypes = {
     id: React.PropTypes.string,
     children: React.PropTypes.any,
     onChange: React.PropTypes.func
