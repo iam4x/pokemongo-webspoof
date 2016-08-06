@@ -5,10 +5,6 @@
 
   .algolia-places {
     width: 330px;
-
-    &.hide {
-      display: none;
-    }
   }
 
   &-btn {
