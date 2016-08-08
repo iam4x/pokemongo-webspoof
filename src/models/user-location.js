@@ -80,13 +80,34 @@ userLocation.intercept(validateCoordinates)
 // after update
 userLocation.observe(() => updateXcodeLocation(userLocation))
 
-// periodically to prevent reversions
-window.setInterval(() => {
+// updated at random intervals to prevent reversion
+let currentTimer = null
+function scheduleUpdate() {
+  const randomWait = random(1000, 10000, true)
   if (!settings.stationaryUpdates.get()) {
+    if (currentTimer) {
+      window.clearTimeout(currentTimer)
+      currentTimer = null
+    }
     return
   }
 
-  updateXcodeLocation(userLocation)
-}, 10000)
+  currentTimer = window.setTimeout(() => {
+    currentTimer = null
+
+    if (!settings.stationaryUpdates.get()) {
+      return
+    }
+
+    updateXcodeLocation(userLocation)
+    scheduleUpdate()
+  }, randomWait)
+}
+
+// watch settings for updates
+settings.stationaryUpdates.observe(() => scheduleUpdate())
+
+// initial trigger
+scheduleUpdate()
 
 export default userLocation
