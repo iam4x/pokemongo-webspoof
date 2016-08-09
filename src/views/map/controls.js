@@ -36,8 +36,10 @@ const handleMove = action((direction) => {
 window.addEventListener('keydown', ({ keyCode }) => {
   switch (keyCode) {
   case 65:
+  case 81:
   case 37: { return handleMove('LEFT') }
   case 87:
+  case 90:
   case 38: { return handleMove('UP') }
   case 68:
   case 39: { return handleMove('RIGHT') }
