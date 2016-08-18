@@ -2,6 +2,8 @@ const electron = require('electron')
 const { resolve } = require('path')
 const { execSync } = require('child_process')
 
+const tryCatch = require('./src/try-catch')
+
 const { app } = electron
 const { BrowserWindow } = electron
 
@@ -25,6 +27,7 @@ const createWindow = () => {
 
 app.on('ready', () => {
   const tmp = require('tmp')
+
   tmp.dir((err, path) => {
     if (err) throw err
 
@@ -36,8 +39,8 @@ app.on('ready', () => {
 
     // quit xcode && remove tmp directory on exit
     app.on('before-quit', () => {
-      execSync('killall Xcode')
-      execSync(`rm -rf ${path}`)
+      tryCatch(() => execSync('killall Xcode'))
+      tryCatch(() => execSync(`rm -rf ${path}`))
     })
   })
 })
