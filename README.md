@@ -51,7 +51,7 @@
 ## Develop
 
 * Download nodejs^6 (https://nodejs.org/en/)
-* `$ git clone git@github.com:iam4x/pokemongo-webspoof.git`
+* `$ git clone https://github.com/iam4x/pokemongo-webspoof.git`
 * `$ cd pokemongo-webspoof && npm install`
 * `$ npm run dev`
 
