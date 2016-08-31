@@ -21,6 +21,10 @@ const handleMove = action((direction) => {
   case 'RIGHT': { newLocation = [ userLocation[0], userLocation[1] + move ]; break }
   case 'DOWN': { newLocation = [ userLocation[0] - move, userLocation[1] ]; break }
   case 'UP': { newLocation = [ userLocation[0] + move, userLocation[1] ]; break }
+  case 'UP-LEFT': { newLocation = [ userLocation[0] + move, userLocation[1] - move ]; break }
+  case 'UP-RIGHT': { newLocation = [ userLocation[0] + move, userLocation[1] + move ]; break }
+  case 'DOWN-LEFT': { newLocation = [ userLocation[0] - move, userLocation[1] - move ]; break }
+  case 'DOWN-RIGHT': { newLocation = [ userLocation[0] - move, userLocation[1] + move ]; break }
   default: { newLocation = [ userLocation[0], userLocation[1] ] }
   }
 
@@ -32,17 +36,56 @@ const handleMove = action((direction) => {
 })
 
 window.addEventListener('keydown', ({ keyCode }) => {
+  const lastDirection = lastMoveDirection.get();
+
   switch (keyCode) {
   case 65:
   case 81:
-  case 37: { return handleMove('LEFT') }
+  case 37: {
+    if (lastDirection === 'UP' || lastDirection === 'DOWN') {
+      return handleMove(lastDirection + '-LEFT');
+    }
+
+    if (lastDirection === 'UP-LEFT' || lastDirection === 'UP-RIGHT') {
+      return handleMove(lastDirection);
+    }
+
+    return handleMove('LEFT') }
   case 87:
   case 90:
-  case 38: { return handleMove('UP') }
+  case 38: { 
+    if (lastDirection === 'LEFT' || lastDirection === 'RIGHT') {
+      return handleMove('UP-' + lastDirection);
+    }
+
+    if (lastDirection === 'UP-LEFT' || lastDirection === 'UP-RIGHT') {
+      return handleMove(lastDirection);
+    }
+  
+    return handleMove('UP') 
+  }
   case 68:
-  case 39: { return handleMove('RIGHT') }
+  case 39: {
+    if (lastDirection === 'UP' || lastDirection === 'DOWN') {
+      return handleMove(lastDirection + '-RIGHT');
+    }
+
+    if (lastDirection === 'UP-RIGHT' || lastDirection === 'DOWN-RIGHT') {
+      return handleMove(lastDirection);
+    }
+
+    return handleMove('RIGHT') }
   case 83:
-  case 40: { return handleMove('DOWN') }
+  case 40: {
+    if (lastDirection === 'LEFT' || lastDirection === 'RIGHT') {
+      return handleMove('DOWN-' + lastDirection);
+    }
+
+    if (lastDirection === 'DOWN-LEFT' || lastDirection === 'DOWN-RIGHT') {
+      return handleMove(lastDirection);
+    }
+
+    return handleMove('DOWN') }
   default: return undefined
   }
 })
