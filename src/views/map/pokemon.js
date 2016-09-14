@@ -1,31 +1,29 @@
 import React from 'react'
 
-import { pokemons } from '../../pokemons.json'
+import pokemons from '../../pokemons.json'
 
 type Props = {
   pokemon: {
-    id: number;
-    data: string;
-    expiration_time: number;
-    pokemonId: number;
-    latitude: number;
-    longitude: number;
-    uid: string;
-    is_alive: boolean;
+    pokemon_id: string;
+    lnglat: Object;
+    encounter_id: string;
+    spawn_id: string;
+    expireAt: string;
     timeLeft: string;
   }
 }
 
 const Pokemon = ({ pokemon }: Props) => {
-  const { pokemonId, timeLeft } = pokemon
+  const { pokemon_id, timeLeft } = pokemon
+  const base64Image = pokemons[pokemon_id.toLowerCase()]
 
   return (
     <div className='pokemon'>
       <img
-        alt={ `pokemon ${pokemonId}` }
-        src={ `https://ugc.pokevision.com/images/pokemon/${pokemonId}.png` } />
+        alt={ `pokemon ${pokemon_id}` }
+        src={ `data:image/png;base64,${base64Image}` } />
       <div className='time-left'>
-        <strong>{ pokemons[pokemonId - 1] }</strong>
+        <strong>{ pokemon_id.toLowerCase() }</strong>
         <div>{ timeLeft }</div>
       </div>
     </div>
