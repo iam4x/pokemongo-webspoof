@@ -23,7 +23,7 @@ const Pokemon = ({ pokemon }: Props) => {
         alt={ `pokemon ${pokemon_id}` }
         src={ `data:image/png;base64,${base64Image}` } />
       <div className='time-left'>
-        <strong>{ pokemon_id.toLowerCase() }</strong>
+        <strong>{ pokemon_id.replace(/_.+$/, '').toLowerCase() }</strong>
         <div>{ timeLeft }</div>
       </div>
     </div>
