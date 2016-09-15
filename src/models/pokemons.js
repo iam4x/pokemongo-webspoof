@@ -1,4 +1,4 @@
-import { uniqBy } from 'lodash'
+import { flatten, uniqBy } from 'lodash'
 import { computed, observable, action } from 'mobx'
 import axios from 'axios'
 
@@ -73,11 +73,17 @@ class Pokemons {
       const baseURL = 'https://cache.fastpokemap.se/?key=allow-all&ts=0&compute='
       const uri = `${baseURL}${this.ip}&lat=${latitude}&lng=${longitude}`
 
-      const pokemons = await request({ uri, headers: this.API_HEADERS, json: true })
+      const pokemons = await Promise.all([
+        request({ uri, headers: this.API_HEADERS, json: true }),
+        request({ uri: uri.replace(latitude, latitude - 0.03), headers: this.API_HEADERS, json: true }),
+        request({ uri: uri.replace(latitude, latitude + 0.03), headers: this.API_HEADERS, json: true }),
+        request({ uri: uri.replace(longitude, longitude - 0.04), headers: this.API_HEADERS, json: true }),
+        request({ uri: uri.replace(longitude, longitude + 0.04), headers: this.API_HEADERS, json: true })
+      ])
 
       // replace pokémon spots by new one :+1:
       this.status = 'online'
-      this.mergePokemons(pokemons)
+      this.mergePokemons(flatten(pokemons))
     } catch (error) {
       Alert.warning(`
         <strong>Could not get Pokémons spots</strong>
