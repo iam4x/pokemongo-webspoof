@@ -17,9 +17,12 @@ class Pokemons {
   // fake headers to query fastpokemap.se easily
   API_HEADERS = {
     pragma: 'no-cache',
-    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2858.0 Safari/537.36',
-    'cache-control': 'no-cache',
     origin: 'https://fastpokemap.se',
+    'accept-encoding': 'gzip, deflate, sdch, br',
+    'accept-language': 'en-US,en;q=0.8,fr;q=0.6',
+    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
+    accept: 'application/json, text/javascript, */*; q=0.01',
+    'cache-control': 'no-cache',
     authority: 'cache.fastpokemap.se'
   }
 
@@ -85,12 +88,14 @@ class Pokemons {
       const baseURL = 'https://cache.fastpokemap.se/?key=allow-all&ts=0&compute='
       const uri = `${baseURL}${this.ip}&lat=${latitude}&lng=${longitude}`
 
+      const config = { headers: this.API_HEADERS, gzip: true, json: true, jar: true }
+
       const pokemons = await Promise.all([
-        request({ uri, headers: this.API_HEADERS, json: true }),
-        request({ uri: uri.replace(latitude, latitude - 0.03), headers: this.API_HEADERS, json: true }),
-        request({ uri: uri.replace(latitude, latitude + 0.03), headers: this.API_HEADERS, json: true }),
-        request({ uri: uri.replace(longitude, longitude - 0.04), headers: this.API_HEADERS, json: true }),
-        request({ uri: uri.replace(longitude, longitude + 0.04), headers: this.API_HEADERS, json: true })
+        request({ uri, headers: this.API_HEADERS, gzip: true, json: true }),
+        request({ uri: uri.replace(latitude, latitude - 0.03), ...config }),
+        request({ uri: uri.replace(latitude, latitude + 0.03), ...config }),
+        request({ uri: uri.replace(longitude, longitude - 0.04), ...config }),
+        request({ uri: uri.replace(longitude, longitude + 0.04), ...config })
       ])
 
       // replace pokémon spots by new one :+1:
@@ -123,7 +128,7 @@ class Pokemons {
       const uri = `${baseURL}&lat=${latitude}&lng=${longitude}`
 
       const { result, error } =
-        await request({ uri, headers: this.API_HEADERS, json: true })
+        await request({ uri, headers: this.API_HEADERS, json: true, gzip: true, jar: true })
 
       // recursive xhr call if it's `overload`
       if (error === 'overload') {
