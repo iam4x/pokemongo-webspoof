@@ -14,6 +14,7 @@ let win
 
 const createWindow = () => {
   win = new BrowserWindow({ width: 800, height: 800 })
+  win.maximize()
   win.loadURL(`file://${__dirname}/index.html`)
 
   // open external URLs into default browser
