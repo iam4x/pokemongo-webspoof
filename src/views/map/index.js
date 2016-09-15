@@ -71,8 +71,8 @@ class Map extends Component {
     this.map.map_.setOptions(toJS(this.mapOptions))
   }
 
-  @action handleClick = ({ lat, lng }) => {
-    if (!this.mapOptions.draggable) {
+  @action handleClick = ({ lat, lng }, force) => {
+    if (!this.mapOptions.draggable || force) {
       this.autopilot.handleSuggestionChange({ suggestion: { latlng: { lat, lng } } })
     }
   }
@@ -93,10 +93,14 @@ class Map extends Component {
             onGoogleApiLoaded={ this.handleGoogleMapLoaded }
             yesIWantToUseGoogleMapApiInternals={ true }>
             { /* display pokémon spots from pokévision */ }
-            { pokevision.pokemonSpots.map((pokemon, idx) =>
+            { pokevision.spots.map((pokemon, idx) =>
               <Pokemon
                 key={ pokemon.pokemon_id + idx }
                 pokemon={ pokemon }
+                onClick={ () => this.handleClick({
+                  lat: pokemon.lnglat.coordinates[1],
+                  lng: pokemon.lnglat.coordinates[0]
+                }, true) }
                 lat={ pokemon.lnglat.coordinates[1] }
                 lng={ pokemon.lnglat.coordinates[0] } />) }
 

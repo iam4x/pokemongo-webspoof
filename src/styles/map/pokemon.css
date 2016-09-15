@@ -4,6 +4,7 @@
   width: 48px;
 
   img {
+    cursor: pointer;
     position: absolute;
     top: -24px;
     left: -24px;

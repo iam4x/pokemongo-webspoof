@@ -1,4 +1,4 @@
-import { observable, action, toJS } from 'mobx'
+import { computed, observable, action } from 'mobx'
 import axios from 'axios'
 
 import Alert from 'react-s-alert'
@@ -15,6 +15,21 @@ class Pokevision {
   @observable ip = null
   @observable pokemonSpots = []
   @observable status = 'unknown'
+
+  @observable excluded = [
+    'pidgey', 'poliwag', 'caterpie', 'zubat', 'staryu',
+    'rattata', 'spearow', 'goldeen', 'weedle', 'pinsir',
+    'kakuna', 'golbat', 'drowzee', 'raticate', 'fearow',
+    'krabby', 'bellsprout', 'psyduck', 'magikarp', 'tentacool',
+    'jigglypuff', 'paras', 'oddish', 'pidgeotto', 'doduo', 'dodrio'
+  ]
+
+  @computed get spots() {
+    return this.pokemonSpots.filter(
+      ({ pokemon_id }) =>
+        !this.excluded.includes(pokemon_id.toLowerCase())
+    )
+  }
 
   @action setIPAddress = async () => {
     try {
@@ -57,7 +72,6 @@ class Pokevision {
       // replace pokémon spots by new one :+1:
       this.status = 'online'
       this.pokemonSpots.replace(this.calcTimeLeft(pokemons))
-      this.updatePokemonSpotsLoop()
     } catch (error) {
       Alert.warning(`
         <strong>Could not get Pokémons spots</strong>
@@ -76,7 +90,7 @@ class Pokevision {
   // loop to run every 500ms to update timeLeft before de-spawn
   // of the pokémon, and remove the old one.
   @action updatePokemonSpotsLoop = () => {
-    const updatedSpots = this.calcTimeLeft(toJS(this.pokemonSpots))
+    const updatedSpots = this.calcTimeLeft(this.pokemonSpots)
     this.pokemonSpots.replace(updatedSpots)
 
     // clear old timeout
@@ -85,7 +99,7 @@ class Pokevision {
       this.timeout = null
     }
 
-    this.timemout = setTimeout(this.updatePokemonSpotsLoop, 500)
+    this.timemout = setTimeout(this.updatePokemonSpotsLoop, 5 * 1000)
   }
 
   // calc human readable `timeLeft` from `expiration_time`
@@ -110,5 +124,6 @@ class Pokevision {
 // start getting pokemons positions
 const pokevision = new Pokevision()
 pokevision.setIPAddress()
+pokevision.updatePokemonSpotsLoop()
 
 export default pokevision
