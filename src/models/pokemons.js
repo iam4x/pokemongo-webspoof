@@ -32,7 +32,10 @@ class Pokemons {
     'rattata', 'spearow', 'goldeen', 'weedle', 'pinsir',
     'kakuna', 'golbat', 'drowzee', 'raticate', 'fearow',
     'krabby', 'bellsprout', 'psyduck', 'magikarp', 'tentacool',
-    'jigglypuff', 'paras', 'oddish', 'pidgeotto', 'doduo', 'dodrio'
+    'jigglypuff', 'paras', 'oddish', 'pidgeotto', 'doduo', 'dodrio',
+    'slowpoke', 'seel', 'jynx', 'gastly', 'horsea', 'venonat', 'tangela',
+    'meowth', 'ekans', 'sandshrew', 'clefairy', 'shellder', 'magmar', 'vulpix',
+    'electabuzz', 'koffing', 'golduck', 'pidgeot'
   ]
 
   @computed get spots() {
