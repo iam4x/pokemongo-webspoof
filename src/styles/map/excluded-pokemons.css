@@ -23,7 +23,13 @@
     li {
       cursor: pointer;
       padding-left: 5px;
-      margin-bottom: 5px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+      &.inactive {
+        text-decoration: line-through;
+        opacity: .2;
+      }
 
       img {
         margin-right: 15px;
@@ -31,9 +37,8 @@
         width: auto;
       }
 
-      &.inactive {
-        text-decoration: line-through;
-        opacity: .1;
+      .tag {
+        margin-top: 4px;
       }
     }
   }

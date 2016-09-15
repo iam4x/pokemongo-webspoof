@@ -46,6 +46,17 @@ class Pokemons {
     )
   }
 
+  @computed get count() {
+    return this.pokemonSpots.reduce((res, curr) => {
+      const pokemonName = curr.pokemon_id.toLowerCase()
+      if (res[pokemonName]) {
+        return ({ ...res, [pokemonName]: res[pokemonName] + 1 })
+      } else {
+        return ({ ...res, [pokemonName]: 1 })
+      }
+    }, {})
+  }
+
   @action setIPAddress = async () => {
     try {
       const { data: { ip } } = await axios.get('https://api.ipify.org?format=json')

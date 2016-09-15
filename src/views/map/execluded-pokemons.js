@@ -1,8 +1,9 @@
-import { reduce, map, capitalize } from 'lodash'
+import { orderBy, reduce, map, capitalize } from 'lodash'
 
 import React from 'react'
 import { action, observable } from 'mobx'
 import { observer } from 'mobx-react'
+import cx from 'classnames'
 
 import pokemonsList from '../../pokemons.json'
 import pokemons from '../../models/pokemons.js'
@@ -18,12 +19,19 @@ const handleClick = (pokemon) => action(() => {
 const filter = observable('')
 const handleChangeFilter = action(({ target: { value } }) => filter.set(value))
 
-const getPokemonsList = () => reduce(pokemonsList, (res, value, key) => {
+const getPokemonsList = () => orderBy(reduce(pokemonsList, (res, value, key) => {
   const hasFilter = !!(filter.get() && filter.get().trim())
   const matchFilter = hasFilter && key.includes(filter.get())
-  if (!hasFilter || matchFilter) return ({ ...res, [key]: value })
+  if (!hasFilter || matchFilter) {
+    return [ ...res, {
+      pokemon: key,
+      image: value,
+      count: pokemons.count[key] || 0,
+      inactive: pokemons.excluded.includes(key)
+    } ]
+  }
   return res
-}, {})
+}, []), [ 'count', 'inactive' ], [ 'desc', 'asc' ])
 
 const ExcludedPokemons = observer(() =>
   <div className='excluded-pokemons'>
@@ -34,16 +42,17 @@ const ExcludedPokemons = observer(() =>
       onChange={ handleChangeFilter }
       placeholder='Filter...' />
     <ul className='wrapper'>
-      { map(getPokemonsList(), (value, key) =>
+      { map(getPokemonsList(), ({ pokemon, image, inactive, count }) =>
         <li
-          key={ key }
-          className={ pokemons.excluded.includes(key) ? 'inactive' : undefined }
-          onClick={ handleClick(key) }>
+          key={ pokemon }
+          className={ cx({ inactive }) }
+          onClick={ handleClick(pokemon) }>
           <img
-            alt={ key }
-            src={ `data:image/png;base64,${value}` } />
-          { capitalize(key) }
-          <small> #{ Object.keys(pokemonsList).indexOf(key) + 1 }</small>
+            alt={ pokemon }
+            src={ `data:image/png;base64,${image}` } />
+          { capitalize(pokemon) }
+          <small> #{ Object.keys(pokemonsList).indexOf(pokemon) + 1 } </small>
+          { count > 1 && <span className='pull-right tag tag-primary'>{ count }</span> }
         </li>) }
     </ul>
   </div>
