@@ -21,7 +21,7 @@ const handleChangeFilter = action(({ target: { value } }) => filter.set(value))
 
 const getPokemonsList = () => orderBy(reduce(pokemonsList, (res, value, key) => {
   const hasFilter = !!(filter.get() && filter.get().trim())
-  const matchFilter = hasFilter && key.includes(filter.get())
+  const matchFilter = hasFilter && key.includes(filter.get().toLowerCase())
   if (!hasFilter || matchFilter) {
     return [ ...res, {
       pokemon: key,
