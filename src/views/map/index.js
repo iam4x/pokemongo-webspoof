@@ -8,7 +8,7 @@ import Alert from 'react-s-alert'
 
 import userLocation from '../../models/user-location.js'
 import settings from '../../models/settings.js'
-import pokevision from '../../models/pokevision.js'
+import pokemons from '../../models/pokemons.js'
 
 import SpeedCounter from './speed-counter.js'
 import BooleanSettings from './boolean-settings.js'
@@ -93,7 +93,7 @@ class Map extends Component {
             onGoogleApiLoaded={ this.handleGoogleMapLoaded }
             yesIWantToUseGoogleMapApiInternals={ true }>
             { /* display pokémon spots from pokévision */ }
-            { pokevision.spots.map((pokemon, idx) =>
+            { pokemons.spots.map((pokemon, idx) =>
               <Pokemon
                 key={ pokemon.pokemon_id + idx }
                 pokemon={ pokemon }

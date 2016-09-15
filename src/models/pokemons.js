@@ -7,7 +7,7 @@ import userLocation from './user-location.js'
 
 const request = window.require('request-promise-native')
 
-class Pokevision {
+class Pokemons {
 
   // reference to `updatePokemonSpotsLoop` setTimeout
   timeout = null
@@ -122,8 +122,8 @@ class Pokevision {
 }
 
 // start getting pokemons positions
-const pokevision = new Pokevision()
-pokevision.setIPAddress()
-pokevision.updatePokemonSpotsLoop()
+const pokemons = new Pokemons()
+pokemons.setIPAddress()
+pokemons.updatePokemonSpotsLoop()
 
-export default pokevision
+export default pokemons
