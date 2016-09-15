@@ -1,3 +1,4 @@
+import { uniqBy } from 'lodash'
 import { computed, observable, action } from 'mobx'
 import axios from 'axios'
 
@@ -11,6 +12,16 @@ class Pokemons {
 
   // reference to `updatePokemonSpotsLoop` setTimeout
   timeout = null
+
+  /* eslint max-len: 0 */
+  // fake headers to query fastpokemap.se easily
+  API_HEADERS = {
+    pragma: 'no-cache',
+    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2858.0 Safari/537.36',
+    'cache-control': 'no-cache',
+    origin: 'https://fastpokemap.se',
+    authority: 'cache.fastpokemap.se'
+  }
 
   @observable ip = null
   @observable pokemonSpots = []
@@ -37,6 +48,7 @@ class Pokemons {
       this.ip = ip
 
       this.getPokemons()
+      this.getNearestPokemons()
     } catch (error) {
       console.warn('could not find IP, retry in 10s')
       console.warn(error)
@@ -58,20 +70,11 @@ class Pokemons {
       const baseURL = 'https://cache.fastpokemap.se/?key=allow-all&ts=0&compute='
       const uri = `${baseURL}${this.ip}&lat=${latitude}&lng=${longitude}`
 
-      /* eslint max-len: 0 */
-      const headers = {
-        pragma: 'no-cache',
-        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2858.0 Safari/537.36',
-        'cache-control': 'no-cache',
-        origin: 'https://fastpokemap.se',
-        authority: 'cache.fastpokemap.se'
-      }
-
-      const pokemons = await request({ uri, headers, json: true })
+      const pokemons = await request({ uri, headers: this.API_HEADERS, json: true })
 
       // replace pokémon spots by new one :+1:
       this.status = 'online'
-      this.pokemonSpots.replace(this.calcTimeLeft(pokemons))
+      this.mergePokemons(pokemons)
     } catch (error) {
       Alert.warning(`
         <strong>Could not get Pokémons spots</strong>
@@ -85,6 +88,40 @@ class Pokemons {
 
     // refresh pokémon spots every 45s
     setTimeout(::this.getPokemons, 45 * 1000)
+  }
+
+  @action getNearestPokemons = async () => {
+    const [ latitude, longitude ] = userLocation
+
+    if (!latitude || !longitude) {
+      return setTimeout(() => this.getNearestPokemons(), 3 * 1000)
+    }
+
+    try {
+      const baseURL = 'https://api.fastpokemap.se/?key=allow-all&ts=0'
+      const uri = `${baseURL}&lat=${latitude}&lng=${longitude}`
+
+      const { result, error } =
+        await request({ uri, headers: this.API_HEADERS, json: true })
+
+      // recursive xhr call if it's `overload`
+      if (error === 'overload') {
+        console.log('overload nearest pokemons -> retry in 500ms')
+        return setTimeout(::this.getNearestPokemons, 500)
+      }
+
+      console.log(
+        'NEAREST_POKEMONS:',
+        result.map(({ pokemon_id }) => pokemon_id).join(' ')
+      )
+
+      this.mergePokemons(result)
+    } catch (err) {
+      console.warn(err)
+      this.status = 'offline'
+    }
+
+    setTimeout(::this.getNearestPokemons, 10 * 1000)
   }
 
   // loop to run every 500ms to update timeLeft before de-spawn
@@ -102,11 +139,25 @@ class Pokemons {
     this.timemout = setTimeout(this.updatePokemonSpotsLoop, 5 * 1000)
   }
 
+  @action mergePokemons = (newPokemons) => {
+    const pokemons = uniqBy(
+      [ ...this.pokemonSpots, ...newPokemons ],
+      ({ encounter_id, spawn_id, pokemon_id, spawn_point_id }) =>
+        encounter_id + (spawn_id || spawn_point_id) + pokemon_id
+    )
+
+    this.pokemonSpots.replace(this.calcTimeLeft(pokemons))
+  }
+
   // calc human readable `timeLeft` from `expiration_time`
   calcTimeLeft = (spots) => spots.reduce((result, curr) => {
-    const { expireAt } = curr
+    const { expireAt, expiration_timestamp_ms } = curr
+    const expires = expireAt || parseInt(expiration_timestamp_ms, 10)
 
-    const diff = new Date(expireAt) - new Date()
+    // filter out pokemons without expires
+    if (!expires) return result
+
+    const diff = new Date(expires) - new Date()
 
     // pokémon spawn expired, remove it from list
     if (diff < 0) return result

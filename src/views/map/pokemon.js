@@ -7,11 +7,15 @@ type Props = {
   onClick: Function;
   pokemon: {
     pokemon_id: string;
-    lnglat: Object;
+    lnglat: ?Object;
     encounter_id: string;
-    spawn_id: string;
-    expireAt: string;
+    spawn_id: ?string;
+    spawn_point_id: ?string;
+    expireAt: ?string;
+    expiration_timestamp_ms: ?string;
     timeLeft: string;
+    latitude: ?number;
+    longitude: ?number;
   }
 }
 

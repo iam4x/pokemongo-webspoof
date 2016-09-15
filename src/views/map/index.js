@@ -98,11 +98,13 @@ class Map extends Component {
                 key={ pokemon.pokemon_id + idx }
                 pokemon={ pokemon }
                 onClick={ () => this.handleClick({
-                  lat: pokemon.lnglat.coordinates[1],
-                  lng: pokemon.lnglat.coordinates[0]
+                  lat: pokemon.lnglat ? pokemon.lnglat.coordinates[1] : pokemon.latitude,
+                  lng: pokemon.lnglat ? pokemon.lnglat.coordinates[0] : pokemon.longitude
                 }, true) }
-                lat={ pokemon.lnglat.coordinates[1] }
-                lng={ pokemon.lnglat.coordinates[0] } />) }
+                lat={ pokemon.lnglat ?
+                  pokemon.lnglat.coordinates[1] : pokemon.latitude }
+                lng={ pokemon.lnglat ?
+                  pokemon.lnglat.coordinates[0] : pokemon.longitude } />) }
 
             { /* userlocation center */ }
             <Pokeball lat={ userLocation[0] } lng={ userLocation[1] } />
