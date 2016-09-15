@@ -35,7 +35,8 @@ class Pokemons {
     'jigglypuff', 'paras', 'oddish', 'pidgeotto', 'doduo', 'dodrio',
     'slowpoke', 'seel', 'jynx', 'gastly', 'horsea', 'venonat', 'tangela',
     'meowth', 'ekans', 'sandshrew', 'clefairy', 'shellder', 'magmar', 'vulpix',
-    'electabuzz', 'koffing', 'golduck', 'pidgeot'
+    'electabuzz', 'koffing', 'golduck', 'pidgeot', 'nidoran_male', 'nidoran_female',
+    'metapod'
   ]
 
   @computed get spots() {

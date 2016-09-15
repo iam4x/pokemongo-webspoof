@@ -8,6 +8,7 @@
 @import './alerts.css';
 @import './autopilot.css';
 @import './pokemon.css';
+@import './excluded-pokemons.css';
 
 .google-map-container {
   position: relative;

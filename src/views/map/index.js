@@ -19,6 +19,7 @@ import TotalDistance from './total-distance.js'
 import Autopilot from './autopilot.js'
 import Pokeball from './pokeball.js'
 import Pokemon from './pokemon.js'
+import ExcludedPokemons from './execluded-pokemons.js'
 
 @observer
 class Map extends Component {
@@ -144,6 +145,7 @@ class Map extends Component {
         <Controls />
         <TotalDistance />
         <Autopilot ref={ (ref) => { this.autopilot = ref } } />
+        <ExcludedPokemons />
       </div>
     )
   }
