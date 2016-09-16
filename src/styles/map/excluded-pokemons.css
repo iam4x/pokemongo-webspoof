@@ -1,0 +1,45 @@
+.excluded-pokemons {
+  position: absolute;
+  padding: 20px;
+  background: rgba(0, 0, 0, .8);
+  border-radius: 5px;
+  top: 130px;
+  right: 10px;
+  height: calc(100vh - 300px);
+  width: 250px;
+
+  input {
+    margin-bottom: 10px;
+  }
+
+  .wrapper {
+    color: #fff;
+    height: calc(100% - 40px);
+    overflow: scroll;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    li {
+      cursor: pointer;
+      padding-left: 5px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+      &.inactive {
+        text-decoration: line-through;
+        opacity: .2;
+      }
+
+      img {
+        margin-right: 15px;
+        height: 20px;
+        width: auto;
+      }
+
+      .tag {
+        margin-top: 4px;
+      }
+    }
+  }
+}

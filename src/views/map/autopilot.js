@@ -40,8 +40,7 @@ class Autopilot extends Component {
 
   componentDidMount() {
     // initialize algolia places input
-    const { placesEl } = this.refs
-    this.placesAutocomplete = places({ container: placesEl })
+    this.placesAutocomplete = places({ container: this.placesEl })
     this.placesAutocomplete.on('change', this.handleSuggestionChange)
 
     window.addEventListener('keyup', ({ keyCode }) => {
@@ -49,7 +48,7 @@ class Autopilot extends Component {
         this.handleCancelAutopilot()
       }
       // use the space bar to pause/start autopilot
-      if (keyCode == 32) {
+      if (keyCode === 32) {
         if (autopilot.running && !autopilot.paused) {
           autopilot.pause()
         } else if (autopilot.paused) {
@@ -133,7 +132,7 @@ class Autopilot extends Component {
         }
 
         <div className={ cx('algolia-places', { hide: !autopilot.clean }) }>
-          <input ref='placesEl' type='search' placeholder='Destination' />
+          <input ref={ (ref) => { this.placesEl = ref } } type='search' placeholder='Destination' />
         </div>
 
         { !autopilot.clean &&

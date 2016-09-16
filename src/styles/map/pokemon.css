@@ -1,0 +1,25 @@
+.pokemon {
+  position: relative;
+  height: 48px;
+  width: 48px;
+
+  img {
+    cursor: pointer;
+    position: absolute;
+    top: -24px;
+    left: -24px;
+  }
+
+  .time-left {
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 3px;
+    color: #fff;
+    padding: 5px;
+    position: absolute;
+    font-size: 11px;
+    text-align: center;
+    top: -24px;
+    left: 24px;
+    white-space: nowrap;
+  }
+}
