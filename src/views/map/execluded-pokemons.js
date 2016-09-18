@@ -1,7 +1,7 @@
 import { orderBy, reduce, map, capitalize } from 'lodash'
 
 import React from 'react'
-import { action, observable } from 'mobx'
+import { toJS, action, observable } from 'mobx'
 import { observer } from 'mobx-react'
 import cx from 'classnames'
 
@@ -14,6 +14,11 @@ const handleClick = (pokemon) => action(() => {
   } else {
     pokemons.excluded.push(pokemon)
   }
+
+  // remember excluded pokemons for next launch
+  window
+    .require('electron-settings')
+    .set('excludedPokemons', toJS(pokemons.excluded))
 })
 
 const filter = observable('')

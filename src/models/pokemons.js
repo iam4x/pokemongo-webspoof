@@ -7,6 +7,15 @@ import Alert from 'react-s-alert'
 import userLocation from './user-location.js'
 
 const request = window.require('request-promise-native')
+const settings = window.require('electron-settings')
+
+// default settings for excluded pokemons
+settings.defaults({
+  excludedPokemons: [
+    'pidgey', 'caterpie', 'zubat', 'staryu',
+    'rattata', 'spearow', 'weedle', 'golbat'
+  ]
+})
 
 class Pokemons {
 
@@ -30,17 +39,7 @@ class Pokemons {
   @observable pokemonSpots = []
   @observable status = 'unknown'
 
-  @observable excluded = [
-    'pidgey', 'poliwag', 'caterpie', 'zubat', 'staryu',
-    'rattata', 'spearow', 'goldeen', 'weedle', 'pinsir',
-    'kakuna', 'golbat', 'drowzee', 'raticate', 'fearow',
-    'krabby', 'bellsprout', 'psyduck', 'magikarp', 'tentacool',
-    'jigglypuff', 'paras', 'oddish', 'pidgeotto', 'doduo', 'dodrio',
-    'slowpoke', 'seel', 'jynx', 'gastly', 'horsea', 'venonat', 'tangela',
-    'meowth', 'ekans', 'sandshrew', 'clefairy', 'shellder', 'magmar', 'vulpix',
-    'electabuzz', 'koffing', 'golduck', 'pidgeot', 'nidoran_male', 'nidoran_female',
-    'metapod'
-  ]
+  @observable excluded = []
 
   @computed get spots() {
     return this.pokemonSpots.filter(
@@ -58,6 +57,11 @@ class Pokemons {
         return ({ ...res, [pokemonName]: 1 })
       }
     }, {})
+  }
+
+  @action initializeExcludedPokemons = async () => {
+    const excluded = await settings.get('excludedPokemons')
+    this.excluded.replace(excluded)
   }
 
   @action setIPAddress = async () => {
@@ -200,6 +204,8 @@ class Pokemons {
 
 // start getting pokemons positions
 const pokemons = new Pokemons()
+
+pokemons.initializeExcludedPokemons()
 pokemons.setIPAddress()
 pokemons.updatePokemonSpotsLoop()
 
