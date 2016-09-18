@@ -1,4 +1,4 @@
-import { flatten, uniqBy } from 'lodash'
+import { uniqBy } from 'lodash'
 import { computed, observable, action } from 'mobx'
 import axios from 'axios'
 
@@ -93,18 +93,11 @@ class Pokemons {
       const uri = `${baseURL}${this.ip}&lat=${latitude}&lng=${longitude}`
 
       const config = { headers: this.API_HEADERS, gzip: true, json: true, jar: true }
-
-      const pokemons = await Promise.all([
-        request({ uri, headers: this.API_HEADERS, gzip: true, json: true }),
-        request({ uri: uri.replace(latitude, latitude - 0.03), ...config }),
-        request({ uri: uri.replace(latitude, latitude + 0.03), ...config }),
-        request({ uri: uri.replace(longitude, longitude - 0.04), ...config }),
-        request({ uri: uri.replace(longitude, longitude + 0.04), ...config })
-      ])
+      const pokemons = await request({ uri, ...config })
 
       // replace pokémon spots by new one :+1:
       this.status = 'online'
-      this.mergePokemons(flatten(pokemons))
+      this.mergePokemons(pokemons)
     } catch (error) {
       Alert.warning(`
         <strong>Could not get Pokémons spots</strong>
