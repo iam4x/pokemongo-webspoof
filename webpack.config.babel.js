@@ -13,20 +13,26 @@ export default {
   },
 
   module: {
-    loaders: [
+    rules: [
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel' },
       { test: /\.css$/, loader: 'style!css!postcss' },
       { test: /\.json$/, loader: 'json' }
     ]
   },
 
-  postcss: (webpackInstance) => [
-    require('postcss-import')({ addDependencyTo: webpackInstance }),
-    require('precss')()
-  ],
-
-  plugins: process.env.NODE_ENV === 'production' ?
-    [
+  plugins: [
+    // https://github.com/postcss/postcss-loader/issues/99
+    new webpack.LoaderOptionsPlugin({
+      test: /\.css$/,
+      options: {
+        postcss: (webpackInstance) => [
+          require('postcss-import')({ addDependencyTo: webpackInstance }),
+          require('precss')()
+        ],
+        context: __dirname,
+      },
+    }),
+    ...process.env.NODE_ENV === 'production' ? [
       new webpack.LoaderOptionsPlugin({ minimize: false, debug: false }),
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({
@@ -52,5 +58,6 @@ export default {
           comments: false
         }
       })
-    ] : []
+    ] : [],
+  ]
 }
