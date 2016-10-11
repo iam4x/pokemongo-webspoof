@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "axios": "^0.14.0",
+    "babel-core": "^6.17.0",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
     "babel-plugin-typecheck": "^3.9.0",
