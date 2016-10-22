@@ -26,6 +26,11 @@ class Map extends Component {
 
   map = null
 
+  home = {
+    lat: 37.74910039104447,
+    lng: -122.42801499999992
+  }
+
   @observable mapOptions = {
     keyboardShortcuts: false,
     draggable: true
@@ -73,6 +78,7 @@ class Map extends Component {
   }
 
   @action handleClick = ({ lat, lng }, force) => {
+    console.log('handling click', this, arguments)
     if (!this.mapOptions.draggable || force) {
       this.autopilot.handleSuggestionChange({ suggestion: { latlng: { lat, lng } } })
     }
