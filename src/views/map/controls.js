@@ -1,4 +1,4 @@
-import { defer, random } from 'lodash'
+import { defer, random, after } from 'lodash'
 import React from 'react'
 import { observable, action } from 'mobx'
 import { observer } from 'mobx-react'
@@ -6,6 +6,10 @@ import cx from 'classnames'
 
 import userLocation from '../../models/user-location.js'
 import settings from '../../models/settings.js'
+
+// HACK DIRECTLY TO MODEL
+import autopilot from '../../models/autopilot.js'
+
 
 const lastMoveDirection = observable(null)
 
@@ -31,6 +35,16 @@ const handleMove = action((direction) => {
   defer(action(() => lastMoveDirection.set(direction)))
 })
 
+var last_escape = 0;
+const handleEscape = after(2, () => {
+  if (Date.now() - last_escape <= 500) {
+    autopilot.stop()
+    last_escape = 0;
+  } else {
+    last_escape = Date.now();  
+  }
+})
+
 window.addEventListener('keydown', ({ keyCode }) => {
   switch (keyCode) {
   case 65:
@@ -43,6 +57,7 @@ window.addEventListener('keydown', ({ keyCode }) => {
   case 39: { return handleMove('RIGHT') }
   case 83:
   case 40: { return handleMove('DOWN') }
+  case 27: { return handleEscape() }
   default: return undefined
   }
 })
