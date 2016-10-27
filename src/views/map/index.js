@@ -26,6 +26,11 @@ class Map extends Component {
 
   map = null
 
+  home = {
+    lat: 37.74910039104447,
+    lng: -122.42801499999992
+  }
+
   @observable mapOptions = {
     keyboardShortcuts: false,
     draggable: true
@@ -72,7 +77,7 @@ class Map extends Component {
     this.map.map_.setOptions(toJS(this.mapOptions))
   }
 
-  @action handleClick = ({ lat, lng }, force) => {
+  @action handleClick = ({x, y, lat, lng, force}) => {
     if (!this.mapOptions.draggable || force) {
       this.autopilot.handleSuggestionChange({ suggestion: { latlng: { lat, lng } } })
     }
@@ -89,7 +94,13 @@ class Map extends Component {
             ref={ (ref) => { this.map = ref } }
             zoom={ settings.zoom.get() }
             center={ [ latitude, longitude ] }
-            onClick={ this.handleClick }
+            onClick={ (result) => {
+              this.handleClick({
+                lat: result.lat,
+                lng: result.lng,
+                force: result.event.shiftKey})
+              }
+            }
             options={ () => this.mapOptions }
             onGoogleApiLoaded={ this.handleGoogleMapLoaded }
             yesIWantToUseGoogleMapApiInternals={ true }>
@@ -100,8 +111,9 @@ class Map extends Component {
                 pokemon={ pokemon }
                 onClick={ () => this.handleClick({
                   lat: pokemon.lnglat ? pokemon.lnglat.coordinates[1] : pokemon.latitude,
-                  lng: pokemon.lnglat ? pokemon.lnglat.coordinates[0] : pokemon.longitude
-                }, true) }
+                  lng: pokemon.lnglat ? pokemon.lnglat.coordinates[0] : pokemon.longitude,
+                  force: true } )
+                }
                 lat={ pokemon.lnglat ?
                   pokemon.lnglat.coordinates[1] : pokemon.latitude }
                 lng={ pokemon.lnglat ?
