@@ -15,6 +15,7 @@ import BooleanSettings from './boolean-settings.js'
 import Coordinates from './coordinates.js'
 import SpeedLimit from './speed-limit.js'
 import Controls from './controls.js'
+import Shortcuts from './shortcuts.js'
 import TotalDistance from './total-distance.js'
 import Autopilot from './autopilot.js'
 import Pokeball from './pokeball.js'
@@ -30,6 +31,7 @@ class Map extends Component {
     lat: 37.74910039104447,
     lng: -122.42801499999992
   }
+
 
   @observable mapOptions = {
     keyboardShortcuts: false,
@@ -95,10 +97,10 @@ class Map extends Component {
             zoom={ settings.zoom.get() }
             center={ [ latitude, longitude ] }
             onClick={ (result) => {
-              this.handleClick({
-                lat: result.lat,
-                lng: result.lng,
-                force: result.event.shiftKey})
+                this.handleClick({
+                  lat: result.lat,
+                  lng: result.lng,
+                  force: result.event.shiftKey})
               }
             }
             options={ () => this.mapOptions }
@@ -155,9 +157,9 @@ class Map extends Component {
         <SpeedLimit />
         <BooleanSettings />
         <Controls />
+        <Shortcuts />
         <TotalDistance />
         <Autopilot ref={ (ref) => { this.autopilot = ref } } />
-        <ExcludedPokemons />
       </div>
     )
   }
