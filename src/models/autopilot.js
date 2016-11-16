@@ -149,6 +149,13 @@ class Autopilot {
         if (this.steps.length !== 0) {
           this.timeout = setTimeout(moveNextPoint, 1000)
         } else {
+          Alert.success(`
+            <strong>Alert</strong>
+            <div class=stack>Arrived at destination...</div`, { 
+              beep: 'src/assets/martian-gun.mp3',
+              timeout: 2000
+            }
+          )
           this.stop()
         }
       }
