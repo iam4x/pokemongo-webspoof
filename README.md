@@ -73,6 +73,11 @@ Happy hacking 👍
 `Xcode can attempt to fix this issue. This will reset your code signing and provisioning settings to recommended values and` `resolve issues with signing identities and provisioning profiles."`
 * https://github.com/iam4x/pokemongo-webspoof/issues/16#issuecomment-233197020
 
+
+`warning: skipping file '/pokemongo-webspoof-master/pokemonLocation.gpx' (unexpected file type 'text' in Frameworks & Libraries build phase)`
+* This is only a warning, you can ignore it. 
+* https://github.com/iam4x/pokemongo-webspoof/issues/38#issuecomment-233726439
+
 ## Credits
 
 * [Pokemon-Go-Controller](https://github.com/kahopoon/Pokemon-Go-Controller) for first proof of concept
