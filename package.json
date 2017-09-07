@@ -58,7 +58,7 @@
     "react-dom": "^15.3.2-rc.1",
     "react-s-alert": "^1.1.4",
     "style-loader": "^0.13.1",
-    "webpack": "^2.1.0-beta.25"
+    "webpack": "^2.2.1"
   },
   "author": "iam4",
   "license": "ISC"
