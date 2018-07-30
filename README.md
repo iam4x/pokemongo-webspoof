@@ -3,6 +3,10 @@
 >
 > Don't forget to star the project for frequent updates 🙏
 
+**NOT SAFE TO USE ANYMORE** 😢
+
+See: https://github.com/iam4x/pokemongo-webspoof/issues/451
+
 ![Example](./example.gif)
 
 * :arrow_right: Download last release [pokemongo-webspoof.app.tar.gz (v1.2.1)](https://github.com/iam4x/pokemongo-webspoof/releases/download/v1.2.1/pokemongo-webspoof-v121.app.tar.gz)
