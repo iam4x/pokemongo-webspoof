@@ -22,48 +22,41 @@ static NSString * const kURLScheme = @"com.googleusercontent.apps.848232511240-d
 @implementation ViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    NSError* catError = nil;
-    NSError* activeError = nil;
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:&catError]; //Allows the silent audio to play along side iTunes
-    [[AVAudioSession sharedInstance] setActive:YES error:&activeError];
-    if (!activeError && !catError) {
-        [self setupAndPlay];
-    }
+  [super viewDidLoad];
+  NSError* catError = nil;
+  NSError* activeError = nil;
+  [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:&catError]; //Allows the silent audio to play along side iTunes
+  [[AVAudioSession sharedInstance] setActive:YES error:&activeError];
+  if (!activeError && !catError) {
+    [self setupAndPlay];
+  }
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Sound Stuff
-
 -(void)setupAndPlay {
-    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"silent" ofType:@"mp3"]];
-    self.backgroundAudioPlayer=[[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-    self.backgroundAudioPlayer.numberOfLoops=-1;
-
-    
-    [self.backgroundAudioPlayer play];
+  NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"silent" ofType:@"mp3"]];
+  self.backgroundAudioPlayer=[[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+  self.backgroundAudioPlayer.numberOfLoops=-1;
+  [self.backgroundAudioPlayer play];
 }
 #pragma mark - Actions
-
 - (IBAction)launchPokemonGo:(id)sender {
-    
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:kURLScheme]]) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kURLScheme]];
-    }
+  if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:kURLScheme]]) {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kURLScheme] options:@{} completionHandler:nil];
+  }
 }
 
 - (IBAction)backgroundAppSwitchChanged:(id)sender {
-    
-    if ([(UISwitch*)sender isOn]) {
-        [self setupAndPlay];
-    }
-    else{
-        [self.backgroundAudioPlayer stop];
-        self.backgroundAudioPlayer = nil;
-    }
+  if ([(UISwitch*)sender isOn]) {
+    [self setupAndPlay];
+  } else {
+    [self.backgroundAudioPlayer stop];
+    self.backgroundAudioPlayer = nil;
+  }
 }
 @end

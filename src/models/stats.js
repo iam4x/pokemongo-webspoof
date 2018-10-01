@@ -57,7 +57,6 @@ class Stats {
   @action clearMoves = () => {
     this.lastMoves.clear()
   }
-
 }
 
 export default new Stats()
