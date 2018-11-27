@@ -2,7 +2,6 @@
 import { random, throttle } from 'lodash'
 import { observable } from 'mobx'
 import Alert from 'react-s-alert'
-
 import settings from './settings.js'
 import stats from './stats.js'
 
@@ -13,9 +12,7 @@ const { exec } = window.require('child_process')
 const { remote } = window.require('electron')
 
 const userLocation = observable([ 0, 0 ])
-
 const isValidLocation = /^([-+]?\d{1,2}([.]\d+)?),\s*([-+]?\d{1,3}([.]\d+)?)$/
-
 const validateCoordinates = ((change) => {
   // check that we have valid coordinates before update
   if (change.type === 'splice') {
@@ -28,11 +25,9 @@ const validateCoordinates = ((change) => {
         <strong>Invalid coordinates received</strong>
         <div class='stack'>{ lat: ${lat}, lng: ${lng} }</div>
       `)
-
       throw new Error(`Invalid coordinates ${lat}, ${lng}`)
     }
   }
-
   return change
 })
 
@@ -41,7 +36,6 @@ const updateXcodeLocation = throttle(([ lat, lng ]) => {
   stats.pushMove(lat, lng)
 
   const jitter = settings.addJitterToMoves.get() ? random(-0.000009, 0.000009, true) : 0
-
   const xcodeLocationData =
     `<gpx creator="Xcode" version="1.1"><wpt lat="${(lat + jitter).toFixed(6)}" lon="${(lng + jitter).toFixed(6)}"><name>PokemonLocation</name></wpt></gpx>`
 
@@ -54,7 +48,6 @@ const updateXcodeLocation = throttle(([ lat, lng ]) => {
         <div class='stack'>${error.message}</div>
         <div class='stack'>${error.stack}</div>
       `)
-
       return console.warn(error)
     }
 
@@ -67,7 +60,6 @@ const updateXcodeLocation = throttle(([ lat, lng ]) => {
             <strong>Error autoclick Xcode - Code 2</strong>
             <div class='stack'>${stderr}</div>
           `)
-
           return console.warn(stderr)
         }
       })

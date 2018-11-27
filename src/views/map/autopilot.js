@@ -88,7 +88,6 @@ class Autopilot extends Component {
 
   @action handleChangeSpeed = () => {
     const { destination: { lat, lng } } = autopilot
-
     autopilot.pause()
     autopilot.scheduleTrip(lat, lng)
       .then(() => { if (!this.isModalOpen) this.isModalOpen = true })
@@ -114,7 +113,6 @@ class Autopilot extends Component {
         </div>
       )
     }
-
     return <noscript />
   }
 
@@ -122,7 +120,6 @@ class Autopilot extends Component {
     return (
       <div className='autopilot'>
         { this.renderTogglePause() }
-
         { !autopilot.clean &&
           <div
             className='edit btn btn-primary'
@@ -130,18 +127,15 @@ class Autopilot extends Component {
             <i className={ `fa fa-${this.travelModeIcon}` } />
           </div>
         }
-
         <div className={ cx('algolia-places', { hide: !autopilot.clean }) }>
           <input ref={ (ref) => { this.placesEl = ref } } type='search' placeholder='Destination' />
         </div>
-
         { !autopilot.clean &&
           <div
             className='autopilot-btn btn btn-danger'
             onClick={ autopilot.stop }>
             Stop autopilot
           </div> }
-
         <div className={ cx('autopilot-modal', { open: this.isModalOpen }) }>
           <div className='travel-modes row'>
             { travelModes.map(([ name, speed, icon ]) =>
@@ -161,11 +155,8 @@ class Autopilot extends Component {
               </div>
             ) }
           </div>
-
           <hr />
-
           { (autopilot.accurateSteps.length !== 0) ?
-
             <div className='infos row'>
               <div className='col-xs-4 text-center'>
                 <strong>Distance: </strong>
@@ -173,14 +164,12 @@ class Autopilot extends Component {
                   { autopilot.distance.toFixed(2) } km
                 </span>
               </div>
-
               <div className='col-xs-4 text-center'>
                 <strong>Speed: </strong>
                 <span className='tag tag-info'>
                   { this.speed } km/h
                 </span>
               </div>
-
               <div className='col-xs-4 text-center'>
                 <strong>Time: </strong>
                 <span className='tag tag-info'>
@@ -189,7 +178,6 @@ class Autopilot extends Component {
               </div>
             </div> :
             <noscript /> }
-
           <div className='text-center row'>
             <div className='col-xs-2'>
               <button
@@ -213,7 +201,6 @@ class Autopilot extends Component {
       </div>
     )
   }
-
 }
 
 export default Autopilot

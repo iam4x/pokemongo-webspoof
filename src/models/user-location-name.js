@@ -15,7 +15,6 @@ const reverseLocation = throttle(([ lat, lng ]) => {
           <strong>Error while reverse location</strong>
           <div class='stack'>${err}</div>
         `)
-
         return console.warn(err)
       }
 

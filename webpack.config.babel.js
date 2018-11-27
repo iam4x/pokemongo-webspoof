@@ -1,5 +1,5 @@
 import webpack from 'webpack'
-const Path = require('path');
+const Path = require('path')
 
 export default {
   entry: [
