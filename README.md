@@ -25,7 +25,7 @@ See: https://github.com/iam4x/pokemongo-webspoof/issues/451
 
 ## Requirements
 
-* Xcode installed
+* [Xcode](https://apps.apple.com/ca/app/xcode/id497799835?mt=12) installed
 * An iOS device with Pokémon Go connected to your Mac via USB
 
 ## How-to run
